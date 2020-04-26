@@ -1,0 +1,23 @@
+.DS_Store
+node_modules
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.env
+.env.test
+
+# Editor directories and files
+.idea
+.vscode
+.vs
+.project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw*

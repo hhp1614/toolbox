@@ -1,0 +1,25 @@
+{
+  "name": "tools-server",
+  "version": "0.0.1",
+  "description": "tools-server",
+  "author": "hhp1614",
+  "license": "MIT",
+  "scripts": {
+    "dev:server": "nodemon src/app.ts",
+    "build:server": "tsc"
+  },
+  "dependencies": {
+    "koa": "^2.11.0",
+    "koa-router": "^8.0.8",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/koa": "^2.11.3",
+    "@types/koa-router": "^7.4.0",
+    "@types/node": "^13.13.1",
+    "nodemon": "^2.0.3",
+    "prettier": "^2.0.4",
+    "ts-node": "^8.9.0",
+    "typescript": "^3.8.3"
+  }
+}

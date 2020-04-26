@@ -1,0 +1,14 @@
+@import "theme";
+
+html, body, #root, #layout {
+  font-size: $font-size-base;
+  color: $text-color;
+}
+
+#layout {
+  padding: 10px;
+
+  .nav {
+    margin-bottom: 10px;
+  }
+}

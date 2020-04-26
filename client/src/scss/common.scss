@@ -1,0 +1,76 @@
+@import "theme";
+
+* {
+  box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+  color: $link-color;
+  font-size: $font-size-base;
+}
+
+button {
+  padding: 4px 15px;
+  background: none;
+  border: 1px solid $border-color-base;
+  border-radius: $border-radius-base;
+  color: $text-color;
+  cursor: pointer;
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $primary-color;
+  }
+
+  &.primary, &.success, &.warn, &.error {
+    border: none;
+    color: #fff;
+  }
+
+  &.primary {
+    background: $primary-color;
+
+    &:hover {
+      background: $primary-color-active;
+    }
+  }
+
+  &.success {
+    background: $success-color;
+
+    &:hover {
+      background: $success-color-active;
+    }
+  }
+
+  &.warn {
+    background: $warning-color;
+
+    &:hover {
+      background: $warning-color-active;
+    }
+  }
+
+  &.error {
+    background: $error-color;
+
+    &:hover {
+      background: $error-color-active;
+    }
+  }
+}
+
+textarea {
+  padding: 10px;
+  outline: none;
+  resize: none;
+  font-family: $code-font-family;
+  border-radius: $border-radius-base;
+  border: 1px solid $border-color-base;
+}
+
+.title {
+  margin-bottom: 10px;
+  font-size: 20px;
+}

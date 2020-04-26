@@ -1,0 +1,49 @@
+@import "../theme";
+
+#json {
+  flex: 1;
+  flex-direction: column;
+  display: flex;
+
+  .tab {
+    display: flex;
+    margin-bottom: 10px;
+
+    .item {
+      padding: 5px 10px;
+      margin-right: 5px;
+      border: 1px solid $border-color-base;
+      border-radius: $border-radius-base;
+      cursor: pointer;
+      transition: $transition-base;
+
+      &.active, &:hover {
+        border-color: $primary-color;
+      }
+    }
+  }
+
+  .content {
+    font-size: 0;
+
+    .source {
+      vertical-align: top;
+      width: 39%;
+      margin: 0 1% 0 0;
+    }
+
+    .output {
+      width: 60%;
+      border: 1px solid $border-color-base;
+      border-radius: $border-radius-base;
+      padding: 10px;
+    }
+
+    .source, .output {
+      display: inline-block;
+      min-height: 500px;
+      font-size: $font-size-base;
+      vertical-align: top;
+    }
+  }
+}
