@@ -16,5 +16,20 @@ export const Url = loadable(() => import('./codec/url'), options);
 // Unicode 编码解码
 export const Unicode = loadable(() => import('./codec/unicode'), options);
 
-// Unicode 编码解码
+// Base64 编码解码
 export const Base64 = loadable(() => import('./codec/base64'), options);
+
+// UTF-8 编码解码
+export const Utf8 = loadable(() => import('./codec/utf8'), options);
+
+// Utf16 编码解码
+export const Utf16 = loadable(() => import('./codec/utf16'), options);
+
+// 十六进制编码解码
+export const Hex = loadable(() => import('./codec/hex'), options);
+
+// MD5 计算
+export const Md5 = loadable(() => import('./codec/md5'), options);
+
+// SHA-1 计算
+export const Sha1 = loadable(() => import('./codec/sha1'), options);

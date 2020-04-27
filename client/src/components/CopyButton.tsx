@@ -19,7 +19,7 @@ const CopyButton: FC<CopyButtonProps> = ({ text }) => {
       <CopyToClipboard text={text} onCopy={copyText}>
         <button className="warn">复制结果</button>
       </CopyToClipboard>
-      {copied ? <span style={{ color: 'green' }}>已复制</span> : null}
+      {copied ? <span style={{ color: '#52c41a' }}>已复制</span> : null}
     </>
   );
 };

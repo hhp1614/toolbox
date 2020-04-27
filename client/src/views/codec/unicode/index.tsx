@@ -22,7 +22,8 @@ const Unicode: FC = () => {
         <textarea
           value={sourceValue}
           onChange={e => setSourceValue(e.target.value)}
-          placeholder="输入需要 URI 编码或解码的字符串" />
+          placeholder="输入需要 URI 编码或解码的字符串"
+        />
       </div>
       <div className="action">
         <button className="primary" onClick={encode}>编码</button>

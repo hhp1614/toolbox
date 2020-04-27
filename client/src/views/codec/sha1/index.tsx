@@ -1,15 +1,12 @@
 import React, { FC, useState } from 'react';
+import sha1 from 'sha1';
 import CopyButton from '../../../components/CopyButton';
-import { utf8Decode, utf8Encode } from '../utf8/utf8';
-import { base64Decode, base64Encode } from './base64';
 
-const Base64: FC = () => {
+const Sha1: FC = () => {
   const [sourceValue, setSourceValue] = useState('');
   const [outputValue, setOutputValue] = useState('');
 
-  const encode = () => setOutputValue(base64Encode(utf8Encode(sourceValue)));
-
-  const decode = () => setOutputValue(utf8Decode(base64Decode(sourceValue)));
+  const encode = () => setOutputValue(sha1(sourceValue));
 
   const clearSourceValue = () => {
     setSourceValue('');
@@ -17,18 +14,17 @@ const Base64: FC = () => {
   };
 
   return (
-    <div id="base64">
-      <div className="title">Base64 编码解码</div>
+    <div id="sha1">
+      <div className="title">SHA-1 计算</div>
       <div className="source">
         <textarea
           value={sourceValue}
           onChange={e => setSourceValue(e.target.value)}
-          placeholder="输入需要 Base64 编码或解码的字符串"
+          placeholder="输入需要 SHA-1 计算的字符串"
         />
       </div>
       <div className="action">
-        <button className="primary" onClick={encode}>编码</button>
-        <button className="success" onClick={decode}>解码</button>
+        <button className="primary" onClick={encode}>计算</button>
         <button className="error" onClick={clearSourceValue}>清空</button>
         <CopyButton text={outputValue} />
       </div>
@@ -39,4 +35,4 @@ const Base64: FC = () => {
   );
 };
 
-export default Base64;
+export default Sha1;

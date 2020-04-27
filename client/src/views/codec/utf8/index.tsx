@@ -1,15 +1,14 @@
 import React, { FC, useState } from 'react';
 import CopyButton from '../../../components/CopyButton';
-import { utf8Decode, utf8Encode } from '../utf8/utf8';
-import { base64Decode, base64Encode } from './base64';
+import { utf8Decode, utf8Encode } from './utf8';
 
-const Base64: FC = () => {
+const Utf8: FC = () => {
   const [sourceValue, setSourceValue] = useState('');
   const [outputValue, setOutputValue] = useState('');
 
-  const encode = () => setOutputValue(base64Encode(utf8Encode(sourceValue)));
+  const encode = () => setOutputValue(utf8Encode(sourceValue));
 
-  const decode = () => setOutputValue(utf8Decode(base64Decode(sourceValue)));
+  const decode = () => setOutputValue(utf8Decode(sourceValue));
 
   const clearSourceValue = () => {
     setSourceValue('');
@@ -17,8 +16,8 @@ const Base64: FC = () => {
   };
 
   return (
-    <div id="base64">
-      <div className="title">Base64 编码解码</div>
+    <div id="utf8">
+      <div className="title">UTF-8 编码解码</div>
       <div className="source">
         <textarea
           value={sourceValue}
@@ -39,4 +38,4 @@ const Base64: FC = () => {
   );
 };
 
-export default Base64;
+export default Utf8;

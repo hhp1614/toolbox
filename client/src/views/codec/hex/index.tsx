@@ -1,15 +1,14 @@
 import React, { FC, useState } from 'react';
 import CopyButton from '../../../components/CopyButton';
-import { utf8Decode, utf8Encode } from '../utf8/utf8';
-import { base64Decode, base64Encode } from './base64';
+import { hexDecode, hexEncode } from './hex';
 
-const Base64: FC = () => {
+const Hex: FC = () => {
   const [sourceValue, setSourceValue] = useState('');
   const [outputValue, setOutputValue] = useState('');
 
-  const encode = () => setOutputValue(base64Encode(utf8Encode(sourceValue)));
+  const encode = () => setOutputValue(hexEncode(sourceValue));
 
-  const decode = () => setOutputValue(utf8Decode(base64Decode(sourceValue)));
+  const decode = () => setOutputValue(hexDecode(sourceValue));
 
   const clearSourceValue = () => {
     setSourceValue('');
@@ -17,13 +16,13 @@ const Base64: FC = () => {
   };
 
   return (
-    <div id="base64">
-      <div className="title">Base64 编码解码</div>
+    <div id="hex">
+      <div className="title">十六进制 编码解码</div>
       <div className="source">
         <textarea
           value={sourceValue}
           onChange={e => setSourceValue(e.target.value)}
-          placeholder="输入需要 Base64 编码或解码的字符串"
+          placeholder="输入需要十六进制编码或解码的字符串"
         />
       </div>
       <div className="action">
@@ -39,4 +38,4 @@ const Base64: FC = () => {
   );
 };
 
-export default Base64;
+export default Hex;

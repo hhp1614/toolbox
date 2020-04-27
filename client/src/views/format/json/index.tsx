@@ -74,7 +74,8 @@ const Index: FC = () => {
           ref={sourceRef}
           onChange={handleInput}
           value={sourceValue}
-          placeholder="输入需要格式化的 JSON" />
+          placeholder="输入需要格式化的 JSON"
+        />
         <div className="output">
           <ReactJson src={setOutputValue(sourceValue)} name={false} />
         </div>
