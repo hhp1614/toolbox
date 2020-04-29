@@ -1,5 +1,5 @@
 import { RouteProps } from 'react-router-dom';
-import { Base64, Hex, Home, Json, Md5, Sha1, Unicode, Url, Utf16, Utf8 } from '../views';
+import { Base64, Hex, Home, Json, Md5, QrCode, Sha1, Unicode, Url, UrlParam, Utf16, Utf8 } from '../views';
 
 export interface ExtRouteProps extends RouteProps {
   category: string;
@@ -14,8 +14,10 @@ export const routes: ExtRouteProps[] = [
   { path: '/codec/base64', component: Base64, category: '编码解码', title: 'Base64' },
   { path: '/codec/utf8', component: Utf8, category: '编码解码', title: 'UTF-8' },
   { path: '/codec/utf16', component: Utf16, category: '编码解码', title: 'UTF-16' },
+  { path: '/codec/qr-code', component: QrCode, category: '编码解码', title: '二维码' },
   { path: '/codec/hex', component: Hex, category: '编码解码', title: 'Hex' },
   { path: '/codec/md5', component: Md5, category: '编码解码', title: 'MD5' },
-  { path: '/codec/sha1', component: Sha1, category: '编码解码', title: 'SHA-1' }
+  { path: '/codec/sha1', component: Sha1, category: '编码解码', title: 'SHA-1' },
+  { path: '/codec/url-param', component: UrlParam, category: '解析', title: 'URL 参数' }
 ];
 

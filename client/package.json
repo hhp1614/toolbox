@@ -5,6 +5,9 @@
   "dependencies": {
     "@loadable/component": "^5.12.0",
     "normalize.css": "^8.0.1",
+    "qrcode-parser": "^1.2.0",
+    "qrcode.react": "^1.0.0",
+    "qs": "^6.9.3",
     "react": "^16.13.1",
     "react-copy-to-clipboard": "^5.0.2",
     "react-dom": "^16.13.1",
@@ -19,6 +22,8 @@
     "@types/jest": "^24.0.0",
     "@types/loadable__component": "^5.10.0",
     "@types/node": "^12.0.0",
+    "@types/qrcode.react": "^1.0.0",
+    "@types/qs": "^6.9.1",
     "@types/react": "^16.9.0",
     "@types/react-copy-to-clipboard": "^4.3.0",
     "@types/react-dom": "^16.9.0",

@@ -1455,6 +1455,18 @@
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
   integrity sha512-ce5d3q03Ex0sy4R14722Rmt6MT07Ua+k4FwDfdcToYJcMKNtRVQvJ6JCAPdAmAnbRb6CsX6aYb9m96NGod9uTw==
 
+"@types/qrcode.react@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/qrcode.react/-/qrcode.react-1.0.0.tgz#9eff4d4a93eb32fcd65e26ea046f2efc52764431"
+  integrity sha512-CyH8QizAyp/G2RTz+2W0qIp/qbJMNC6a8aossG+zN42Rmx3loQlgBCWFatjKJ3NeJaX99e22SJ75yU2EVHlu3g==
+  dependencies:
+    "@types/react" "*"
+
+"@types/qs@^6.9.1":
+  version "6.9.1"
+  resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.1.tgz#937fab3194766256ee09fcd40b781740758617e7"
+  integrity sha512-lhbQXx9HKZAPgBkISrBcmAcMpZsmpe/Cd/hY7LGZS5OfkySUBItnPZHgQPssWYUET8elF+yCFBbP1Q0RZPTdaw==
+
 "@types/react-copy-to-clipboard@^4.3.0":
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/@types/react-copy-to-clipboard/-/react-copy-to-clipboard-4.3.0.tgz#8e07becb4f11cfced4bd36038cb5bdf5c2658be5"
@@ -6481,6 +6493,11 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+jsqr@^1.0.4:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/jsqr/-/jsqr-1.2.0.tgz#f93fc65fa7d1ded78b1bcb020fa044352b04261a"
+  integrity sha512-wKcQS9QC2VHGk7aphWCp1RrFyC0CM6fMgC5prZZ2KV/Lk6OKNoCod9IR6bao+yx3KPY0gZFC5dc+h+KFzCI0Wg==
+
 jsx-ast-utils@^2.2.1, jsx-ast-utils@^2.2.3:
   version "2.2.3"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-2.2.3.tgz#8a9364e402448a3ce7f14d357738310d9248054f"
@@ -7718,7 +7735,7 @@ p-try@^2.0.0:
   resolved "https://registry.yarnpkg.com/p-try/-/p-try-2.2.0.tgz#cb2868540e313d61de58fafbe35ce9004d5540e6"
   integrity sha512-R4nPAVTAU0B9D35/Gk3uJf/7XYbQcyohSKdvAxIRSNghFl4e71hVoGnBNQz9cWaXxO2I10KTC+3jMdvvoKw6dQ==
 
-pako@~1.0.5:
+pako@^1.0.5, pako@~1.0.5:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
@@ -8865,10 +8882,37 @@ q@^1.1.2:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+qr.js@0.0.0:
+  version "0.0.0"
+  resolved "https://registry.yarnpkg.com/qr.js/-/qr.js-0.0.0.tgz#cace86386f59a0db8050fa90d9b6b0e88a1e364f"
+  integrity sha1-ys6GOG9ZoNuAUPqQ2baw6IoeNk8=
+
+qrcode-parser@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/qrcode-parser/-/qrcode-parser-1.2.0.tgz#87a6175f23aa3c5bd442bf50c7a827fe6ccb247f"
+  integrity sha512-iaJZpu+Ygqqpvybfn+i8wAjSQfpb++3qKpRRLgaYGsq2m1r6L6FdnNWVKijdyCc2PYW3kMz6Aud60pPTjOKjyQ==
+  dependencies:
+    jsqr "^1.0.4"
+    upng-js "^2.1.0"
+
+qrcode.react@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/qrcode.react/-/qrcode.react-1.0.0.tgz#7e8889db3b769e555e8eb463d4c6de221c36d5de"
+  integrity sha512-jBXleohRTwvGBe1ngV+62QvEZ/9IZqQivdwzo9pJM4LQMoCM2VnvNBnKdjvGnKyDZ/l0nCDgsPod19RzlPvm/Q==
+  dependencies:
+    loose-envify "^1.4.0"
+    prop-types "^15.6.0"
+    qr.js "0.0.0"
+
 qs@6.7.0:
   version "6.7.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
+
+qs@^6.9.3:
+  version "6.9.3"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.9.3.tgz#bfadcd296c2d549f1dffa560619132c977f5008e"
+  integrity sha512-EbZYNarm6138UKKq46tdx08Yo/q9ZhFoAXAI1meAFd2GtbRDhbZY2WQSICskT0c5q99aFzLG1D4nvTk9tqfXIw==
 
 qs@~6.5.2:
   version "6.5.2"
@@ -10817,6 +10861,13 @@ upath@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/upath/-/upath-1.2.0.tgz#8f66dbcd55a883acdae4408af8b035a5044c1894"
   integrity sha512-aZwGpamFO61g3OlfT7OQCHqhGnW43ieH9WZeP7QxN/G/jS4jfqUkZxoryvJgVPEcrl5NL/ggHsSmLMHuH64Lhg==
+
+upng-js@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/upng-js/-/upng-js-2.1.0.tgz#7176e73973db361ca95d0fa14f958385db6b9dd2"
+  integrity sha512-d3xzZzpMP64YkjP5pr8gNyvBt7dLk/uGI67EctzDuVp4lCZyVMo0aJO6l/VDlgbInJYDY6cnClLoBp29eKWI6g==
+  dependencies:
+    pako "^1.0.5"
 
 uri-js@^4.2.2:
   version "4.2.2"

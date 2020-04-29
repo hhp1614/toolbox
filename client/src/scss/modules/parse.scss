@@ -1,0 +1,26 @@
+#urlParam {
+  .action {
+    margin: 10px 0;
+
+    button {
+      margin-right: 10px;
+    }
+  }
+
+  .source {
+    textarea {
+      width: 100%;
+      height: 80px;
+    }
+  }
+
+  .output {
+    .item {
+      margin-bottom: 10px;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}

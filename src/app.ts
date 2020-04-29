@@ -1,14 +1,11 @@
 import Koa from 'koa';
-import Router from 'koa-router';
+import Static from 'koa-static';
+import path from 'path';
 
 const app = new Koa();
-const router = new Router();
 
-router.get('/', async ctx => {
-  ctx.body = 'hello world';
-});
+app.use(Static(path.resolve(__dirname, '../client/build')));
 
-app.use(router.routes());
-
-app.listen(9000);
-console.log(`server running on port 9000`);
+const port = 9000;
+app.listen(port);
+console.log(`server running on port ${port}`);

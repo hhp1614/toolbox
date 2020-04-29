@@ -10,7 +10,7 @@ a {
   font-size: $font-size-base;
 }
 
-button {
+button, .btn {
   padding: 4px 15px;
   background: none;
   outline: none;
@@ -18,7 +18,8 @@ button {
   border-radius: $border-radius-base;
   color: $text-color;
   cursor: pointer;
-  transition: $transition-base;
+  font-size: $font-size-base;
+  display: inline-block;
 
   &:hover {
     border-color: $primary-color;

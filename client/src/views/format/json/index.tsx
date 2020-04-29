@@ -1,4 +1,4 @@
-import React, { FC, MutableRefObject, useRef, useState } from 'react';
+import React, { FC, useRef, useState } from 'react';
 import ReactJson from 'react-json-view';
 
 type List = {
@@ -10,7 +10,7 @@ type List = {
 const Index: FC = () => {
   const [list, setList] = useState<List>([{ id: 0, source: '', isActive: true }]);
   const [sourceValue, setSourceValue] = useState('');
-  const sourceRef: MutableRefObject<any> = useRef();
+  const sourceRef = useRef<HTMLTextAreaElement>({} as HTMLTextAreaElement);
 
   const changeTab = (id: number) => {
     list.forEach(i => {
