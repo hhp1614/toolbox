@@ -13,7 +13,7 @@ npm i -g pm2
 在当前目录运行
 
 ```shell script
-pm2 start dist/app.js
+pm2 start dist/app.js --name toolbox
 ```
 
 然后浏览器访问：http://localhost:9000
@@ -21,5 +21,5 @@ pm2 start dist/app.js
 ## 停止
 
 ```shell script
-pm2 stop app
+pm2 stop toolbox
 ```
