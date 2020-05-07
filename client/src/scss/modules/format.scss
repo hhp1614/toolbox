@@ -33,10 +33,11 @@
     }
 
     .output {
+      padding: 10px;
       width: 60%;
       border: 1px solid $border-color-base;
       border-radius: $border-radius-base;
-      padding: 10px;
+      word-break: break-all;
     }
 
     .source, .output {
