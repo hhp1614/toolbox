@@ -17,6 +17,7 @@ const UrlParam: FC = () => {
       setPathname(url.pathname.replace(/\/$/, ''));
       setParams(qs.parse(url.search.replace(/^\?/, '')));
     } catch {
+      setParams(qs.parse(sourceValue.replace(/^\?/, '')));
     }
   };
 
