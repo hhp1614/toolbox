@@ -1,5 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import ReactJson from 'react-json-view';
+import { unicodeDecode } from '../../codec/unicode/unicode';
 
 type List = {
   id: number;
@@ -41,7 +42,7 @@ const Index: FC = () => {
     if (source.trim() === '') return {};
     const errJson = { ERROR: '不是有效的 JSON 对象' };
     try {
-      const res = JSON.parse(source);
+      const res = JSON.parse(unicodeDecode(source));
       const t = typeof res;
       return (t != null && t === 'object') ? res : errJson;
     } catch {
