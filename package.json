@@ -5,6 +5,7 @@
   "author": "hhp1614",
   "license": "MIT",
   "scripts": {
+    "start": "pm2 start dist/app.js --name toolbox",
     "dev": "nodemon src/app.ts",
     "build": "tsc"
   },

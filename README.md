@@ -15,7 +15,9 @@ npm i -g pm2
 在当前目录运行
 
 ```shell script
-pm2 start dist/app.js --name toolbox
+yarn start
+# or
+npm start
 ```
 
 然后浏览器访问：http://localhost:9000
