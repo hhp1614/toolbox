@@ -1,0 +1,32 @@
+@import '../var';
+
+$contentHeight: 640px;
+
+#format-json {
+  // 更改插件 codemirror 的样式
+  .vue-codemirror .CodeMirror {
+    height: $contentHeight;
+  }
+
+  // 更改插件 vue-json-pretty 的样式
+  .json-view {
+    padding: 4px;
+    height: $contentHeight;
+    word-break: break-all;
+    overflow-y: auto;
+
+    .vjs-tree .vjs-value__string {
+      color: #067d17;
+    }
+
+    .vjs-tree .vjs-value__number {
+      color: #1750eb;
+    }
+
+    div {
+      line-height: 1.5;
+      font-family: $codeFont;
+      font-size: $codeSize;
+    }
+  }
+}
