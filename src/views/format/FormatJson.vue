@@ -1,49 +1,54 @@
 <template>
-  <v-container id="format-json" fluid>
-    <!--tab 栏-->
-    <v-chip-group :value="activeTabName" active-class="primary--text" mandatory>
-      <v-chip v-for="(item, index) in tabs" :key="index" :value="item.name" @click="changeTab(item.name)" small>
-        {{ item.name }}
-      </v-chip>
-      <v-chip color="success" @click="addTab" small>
-        <v-icon small>mdi-plus</v-icon>
-        新建
-      </v-chip>
-      <v-chip :disabled="tabs.length <= 1" color="error" @click="clearTab" small>
-        <v-icon small>mdi-delete</v-icon>
-        清空
-      </v-chip>
-    </v-chip-group>
-
-    <v-row>
-      <!--输入-->
-      <v-col cols="5">
-        <codemirror
-          v-model="jsonSource"
-          class="shadow"
-          :options="cmOptions"
-          @input="inputJson"
-          placeholder="输入 JSON"
-        />
-      </v-col>
-
-      <!--输出-->
-      <v-col cols="7">
-        <vue-json-pretty :data="jsonObject" class="json-view shadow" showLength highlightMouseoverNode />
-        <div class="mt-2">
-          <copy-btn :value="JSON.stringify(jsonObject, null, 2)" />
-          排序：
-          <v-btn class="mr-2" @click="changeOrder('default')" small>默认</v-btn>
-          <v-btn class="mr-2" @click="changeOrder('asc')" small>升序</v-btn>
-          <v-btn class="mr-2" @click="changeOrder('desc')" small>降序</v-btn>
+  <div id="format-json" class="mdui-row">
+    <div class="mdui-m-b-1">
+      <div
+        class="mdui-chip mdui-m-r-1"
+        v-for="(item, index) in tabs"
+        :key="index"
+        :class="{ 'mdui-color-theme': activeId === item.id }"
+        @click="changeTab(item.id)"
+      >
+        <div class="mdui-chip-title">{{ item.name }}</div>
+        <div class="mdui-chip-delete" @click.stop="deleteTab(index)">
+          <i class="mdui-icon material-icons">cancel</i>
         </div>
-      </v-col>
-    </v-row>
-  </v-container>
+      </div>
+      <div class="mdui-chip mdui-m-r-1">
+        <div class="mdui-chip-icon mdui-color-blue" mdui-tooltip="{content: '新建 tab'}" @click="addTab">
+          <i class="mdui-icon material-icons">add</i>
+        </div>
+      </div>
+      <div class="mdui-chip">
+        <div class="mdui-chip-icon mdui-color-red" mdui-tooltip="{content: '清空 tab'}" @click="clearTab">
+          <i class="mdui-icon material-icons">delete</i>
+        </div>
+      </div>
+    </div>
+    <div class="mdui-col-xs-6">
+      <codemirror
+        v-model="jsonSource"
+        class="mdui-shadow-2"
+        :options="{ mode: 'application/json', theme: cmTheme }"
+        @input="inputJson"
+        placeholder="输入 JSON"
+      />
+    </div>
+    <div class="mdui-col-xs-6">
+      <vue-json-pretty :data="jsonObject" class="json-view mdui-shadow-2" showLength highlightMouseoverNode />
+      <div class="mdui-m-t-1">
+        <copy-btn :value="JSON.stringify(jsonObject, null, 2)" />
+        <div class="mdui-btn-group">
+          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('default')">默认</button>
+          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('asc')">升序</button>
+          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('desc')">降序</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
+import { mapActions, mapGetters, mapState } from 'vuex';
 import VueJsonPretty from 'vue-json-pretty';
 import 'codemirror/mode/javascript/javascript';
 import { isArray, isObject, isObjectLike, isPlainObject } from '@hhp1614/utils/lib/common/type';
@@ -58,24 +63,21 @@ export default {
       // 输入的 JSON
       jsonSource: '',
       // 输出的对象
-      jsonObject: {},
-      // codemirror 选项
-      cmOptions: {
-        mode: 'application/json'
-      }
+      jsonObject: {}
     };
   },
   computed: {
-    ...mapState('format/json', ['tabs', 'activeTabName'])
+    ...mapState('format/json', ['tabs', 'activeId']),
+    ...mapGetters(['cmTheme'])
   },
   created() {
-    this.jsonSource = this.tabs.find(i => i.name === this.activeTabName)?.json ?? '';
+    this.jsonSource = this.tabs.find(i => i.id === this.activeId)?.json ?? '';
   },
   methods: {
-    ...mapActions('format/json', ['acAddTab', 'acUpdateActiveTab', 'acUpdateTab', 'acClearTabs']),
+    ...mapActions('format/json', ['acAddTab', 'acUpdateActiveTab', 'acUpdateTab', 'acClearTabs', 'acDeleteTab']),
     // 事件：输入 JSON
     inputJson() {
-      this['acUpdateTab']({ name: this.activeTabName, json: this.jsonSource });
+      this['acUpdateTab']({ id: this.activeId, json: this.jsonSource });
       this.generateFromSource();
     },
     // 根据输入 JSON 生成对象
@@ -87,7 +89,7 @@ export default {
         return;
       }
       const json = this.parseJson(this.jsonSource);
-      //
+      // 输入不是数组或对象
       if (!isObjectLike(json)) {
         this.showError();
         return;
@@ -109,21 +111,30 @@ export default {
       this.jsonObject = { error: '不是有效的 JSON 字符串' };
     },
     // 设置输入的 JSON
-    setJsonSource() {
-      this.jsonSource = this.tabs.find(i => i.name === this.activeTabName)?.json ?? '';
-      this.generateFromSource();
+    setJsonSource(action, param) {
+      action(param).then(() => {
+        this.jsonSource = this.tabs.find(i => i.id === this.activeId)?.json ?? '';
+        this.generateFromSource();
+      });
     },
     // 事件：切换 tab
-    changeTab(name) {
-      this['acUpdateActiveTab'](name).then(() => this.setJsonSource());
+    changeTab(id) {
+      // 优化
+      if (id === this.activeId) return;
+      this.setJsonSource(this['acUpdateActiveTab'], id);
     },
     // 事件：增加 tab
     addTab() {
-      this['acAddTab']().then(() => this.setJsonSource());
+      this.setJsonSource(this['acAddTab']);
+    },
+    // 事件：删除 tab
+    deleteTab(index) {
+      if (this.tabs.length <= 1) return;
+      this.setJsonSource(this['acDeleteTab'], index);
     },
     // 事件：清空 tab
     clearTab() {
-      this['acClearTabs']().then(() => this.setJsonSource());
+      this.setJsonSource(this['acClearTabs']);
     },
     // 事件：排序 default-默认 asc-升序 desc-降序
     changeOrder(order) {

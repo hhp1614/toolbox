@@ -1,0 +1,11 @@
+@import './var';
+
+// 插件 codemirror
+.vue-codemirror .CodeMirror {
+  font-family: $codeFont;
+  font-size: $codeSize;
+
+  pre.CodeMirror-placeholder {
+    color: #999999;
+  }
+}

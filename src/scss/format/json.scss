@@ -2,6 +2,15 @@
 
 $contentHeight: 640px;
 
+// 浅色主题 背景颜色
+$lightModeBg: #ffffff;
+// 浅色主题 hover 颜色
+$lightModeBgHover: #e6f7ff;
+// 深色主题 背景颜色
+$darkModeBg: #272822;
+// 深色主题 hover 颜色
+$darkModeBgHover: #3e3d32;
+
 #format-json {
   // 更改插件 codemirror 的样式
   .vue-codemirror .CodeMirror {
@@ -14,19 +23,53 @@ $contentHeight: 640px;
     height: $contentHeight;
     word-break: break-all;
     overflow-y: auto;
+    box-sizing: border-box;
 
+    // 更改默认字符串颜色
     .vjs-tree .vjs-value__string {
       color: #067d17;
     }
 
+    // 更改默认数字颜色
     .vjs-tree .vjs-value__number {
       color: #1750eb;
     }
 
+    // 设置文本样式
     div {
       line-height: 1.5;
       font-family: $codeFont;
       font-size: $codeSize;
+    }
+  }
+}
+// 插件 vue-json-pretty 浅色主题
+.mdui-theme-layout-light {
+  #format-json {
+    .json-view {
+      background-color: $lightModeBg;
+    }
+    .vjs-tree.is-mouseover {
+      background-color: $lightModeBgHover;
+
+      &.is-root {
+        background-color: $lightModeBg;
+      }
+    }
+  }
+}
+// 插件 vue-json-pretty 深色主题
+.mdui-theme-layout-dark {
+  #format-json {
+    .json-view {
+      background-color: $darkModeBg;
+    }
+    .vjs-tree.is-mouseover {
+      background-color: $darkModeBgHover;
+
+      &.is-root {
+        background-color: $darkModeBg;
+      }
     }
   }
 }

@@ -1,62 +1,76 @@
 <template>
-  <v-app>
-    <!--应用栏-->
-    <v-app-bar :class="textColor" :color="color" clipped-left app dense>
-      <v-app-bar-nav-icon :class="textColor" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>
-        <router-link :class="textColor" to="/">Toolbox 工具箱</router-link>
-      </v-toolbar-title>
-    </v-app-bar>
-
-    <!--导航栏-->
-    <v-navigation-drawer v-model="drawer" app clipped>
-      <v-list v-model="currentPath" dense>
-        <v-list-group v-for="(item, key) in pages" :key="key" :value="true" :prepend-icon="item.icon" no-action>
-          <template v-slot:activator>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
-          </template>
-          <v-list-item
-            v-for="(child, key) in item.children"
-            :key="key"
-            :to="`${item.type}/${child.type}`"
-            exact
-            two-line
-            link
-          >
-            <v-list-item-content>
-              <v-list-item-title>{{ child.title }}</v-list-item-title>
-              <v-list-item-subtitle>{{ child.subtitle }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-group>
-      </v-list>
-    </v-navigation-drawer>
-
-    <!--内容-->
-    <v-main>
-      <!--Tab 栏-->
-      <v-tabs>
-        <v-tab v-for="(item, index) in tabs" :key="index" :to="item.path" exact>
-          {{ item.title }}
-          <v-btn class="ml-1" @click.stop.prevent="closeTab(index)" icon x-small>
-            <v-icon small>mdi-close</v-icon>
-          </v-btn>
-        </v-tab>
-      </v-tabs>
-      <slot />
-    </v-main>
-
-    <!--页脚-->
-    <v-footer :class="textColor" :color="color" app>
-      <div style="flex: 1;" class="text-center">
-        <span>Made with ♥ </span>
-        <a :class="textColor" href="https://github.com/hhp1614" target="_blank">hhp1614</a>
+  <div class="mdui-appbar-with-toolbar mdui-drawer-body-left">
+    <!-- 应用栏 -->
+    <header class="mdui-appbar mdui-appbar-fixed">
+      <div class="mdui-toolbar mdui-color-theme">
+        <button class="mdui-btn mdui-btn-icon mdui-ripple" @click="() => drawer.toggle()">
+          <i class="mdui-icon material-icons">menu</i>
+        </button>
+        <router-link class="mdui-typo-headline" to="/">Toolbox</router-link>
+        <span class="mdui-typo-title">工具箱</span>
+        <div class="mdui-toolbar-spacer"></div>
+        <button
+          id="toggle-dark"
+          class="mdui-btn mdui-btn-icon"
+          @mouseenter="() => toggleDarkBtn.open({ content: tooltipContent })"
+          @mouseleave="() => toggleDarkBtn.close()"
+          @click="toggleDark"
+        >
+          <i class="mdui-icon material-icons">{{ dark ? 'brightness_4' : 'brightness_7' }}</i>
+        </button>
+        <button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '关于'}">
+          <i class="mdui-icon material-icons">info</i>
+        </button>
       </div>
-    </v-footer>
-  </v-app>
+    </header>
+    <!-- 导航栏 -->
+    <div id="drawer" class="mdui-drawer mdui-shadow-6">
+      <div id="collapse" class="mdui-list" mdui-collapse>
+        <div
+          class="mdui-collapse-item mdui-collapse-item-open"
+          v-for="(item, index) in pages"
+          :key="index"
+          :class="'collapse-item-' + index"
+        >
+          <div
+            class="mdui-collapse-item-header mdui-list-item mdui-ripple"
+            @click.stop="() => collapse.toggle('.collapse-item-' + index)"
+          >
+            <i class="mdui-list-item-icon mdui-icon material-icons">{{ item.icon }}</i>
+            <div class="mdui-list-item-content">{{ item.title }}</div>
+            <i class="mdui-collapse-item-arrow mdui-icon material-icons">keyboard_arrow_down</i>
+          </div>
+          <div class="mdui-collapse-item-body mdui-list">
+            <router-link
+              class="mdui-list-item mdui-ripple"
+              aria-current-value="page"
+              exact-active-class="mdui-list-item-active"
+              v-for="(child, key) in item.children"
+              :key="key"
+              :to="`${item.type}/${child.type}`"
+              exact
+            >
+              <div class="mdui-list-item-content">
+                <div class="mdui-list-item-title">{{ child.title }}</div>
+                <div class="mdui-list-item-text">{{ child.subtitle }}</div>
+              </div>
+            </router-link>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- 内容 -->
+    <div class="mdui-container-fluid mdui-typo mdui-p-x-5">
+      <h1 v-html="titleHTML" />
+      <router-view />
+    </div>
+  </div>
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex';
+import mdui from 'mdui';
+import { isEmptyObject } from '@hhp1614/utils/lib/common/type';
 import { pages } from '../../router/pageRoutes';
 
 /**
@@ -68,43 +82,58 @@ export default {
     return {
       // 导航配置
       pages,
-      // 背景颜色
-      color: 'indigo',
-      // 文本颜色
-      textColor: 'white--text',
-      // 是否显示导航栏
-      drawer: true,
-      // 标签页
-      tabs: []
+      // 导航栏
+      drawer: null,
+      // 导航列表
+      collapse: null,
+      // 切换深色主题按钮
+      toggleDarkBtn: null,
+      // 标题
+      titleHTML: ''
     };
   },
   computed: {
-    // 当前路径
-    currentPath() {
-      return this.$route.path;
+    ...mapState(['dark']),
+    // 切换主题按钮的提示内容
+    tooltipContent() {
+      return this.dark ? '切换到浅色主题' : '切换到深色主题';
     }
-  },
-  created() {
-    // 将当前路径作为第一个 tab
-    const { meta, path } = this.$route;
-    this.tabs.push({ title: meta.title, path });
   },
   watch: {
-    // 监听路由变化，如果路由路径在 tabs 中不存在就增加 tab
-    $route({ meta, path }) {
-      if (!this.tabs.find(i => i.path === path)) {
-        this.tabs.push({ title: meta.title, path });
-      }
+    // 根据路由切换标题
+    $route({ meta }) {
+      this.setTitle(meta);
     }
   },
+  mounted() {
+    this.setTitle(this.$route.meta);
+    this.drawer = new mdui.Drawer('#drawer');
+    this.collapse = new mdui.Collapse('#collapse');
+    this.toggleDarkBtn = new mdui.Tooltip('#toggle-dark', { content: this.tooltipContent });
+    this.setTheme();
+  },
   methods: {
-    // 关闭 tab
-    closeTab(index) {
-      if (this.tabs.length > 1) {
-        this.tabs.splice(index, 1);
-        const target = this.tabs[index] ?? this.tabs[index - 1];
-        this.$router.push(target.path);
-      }
+    ...mapActions(['acToggleDark']),
+    // 切换深色主题
+    toggleDark() {
+      this['acToggleDark']().then(() => {
+        this.toggleDarkBtn.close();
+        this.toggleDarkBtn.open({ content: this.tooltipContent });
+        this.setTheme();
+      });
+    },
+    // 设置标题
+    setTitle(meta) {
+      this.titleHTML = isEmptyObject(meta) ? '' : ` ${meta.title} <small>${meta.subtitle ?? ''}</small>`;
+    },
+    // 设置主题
+    setTheme() {
+      const rc = this.dark ? 'light' : 'dark';
+      const ac = this.dark ? 'dark' : 'light';
+      mdui
+        .$('body')
+        .removeClass(`mdui-theme-layout-${rc}`)
+        .addClass(`mdui-theme-layout-${ac}`);
     }
   }
 };

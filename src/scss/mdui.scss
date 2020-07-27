@@ -1,0 +1,30 @@
+// 深色主题 按钮组内的按钮文本颜色
+.mdui-theme-layout-dark {
+  .mdui-btn-group .mdui-btn {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+// 列表样式
+.mdui-list {
+  .mdui-list-item {
+    .mdui-list-item-content {
+      line-height: inherit;
+      padding: 10px 0;
+    }
+
+    .mdui-list-item-title {
+      font-size: 14px;
+    }
+
+    .mdui-list-item-text {
+      font-size: 12px;
+    }
+  }
+}
+
+.mdui-chip {
+  > .mdui-chip-delete {
+    margin-top: -5px;
+  }
+}

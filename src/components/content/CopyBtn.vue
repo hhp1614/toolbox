@@ -1,15 +1,17 @@
 <template>
-  <v-tooltip v-model="show" color="success" :open-on-hover="false" top>
-    <template v-slot:activator="{ attrs }">
-      <v-btn class="mr-4" color="primary" v-bind="attrs" v-clipboard:copy="value" v-clipboard:success="onCopy" small>
-        复制
-      </v-btn>
-    </template>
-    <span>复制成功</span>
-  </v-tooltip>
+  <button
+    class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-theme mdui-ripple copy-btn"
+    v-clipboard:copy="value"
+    v-clipboard:success="onCopy"
+    @mouseenter="() => btn.open({ content: '复制' })"
+    @mouseleave="() => btn.close()"
+  >
+    <i class="mdui-icon material-icons">content_copy</i>
+  </button>
 </template>
 
 <script>
+import mdui from 'mdui';
 /**
  * 复制按钮组件
  */
@@ -20,15 +22,18 @@ export default {
   },
   data() {
     return {
-      show: false
+      btn: null,
+      tipsDefault: '复制',
+      tipsSuccess: '复制成功'
     };
+  },
+  mounted() {
+    this.btn = new mdui.Tooltip('.copy-btn', { content: this.tipsDefault });
   },
   methods: {
     onCopy() {
-      this.show = true;
-      setTimeout(() => {
-        this.show = false;
-      }, 800);
+      this.btn.close();
+      this.btn.open({ content: this.tipsSuccess });
     }
   }
 };

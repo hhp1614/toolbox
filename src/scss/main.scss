@@ -1,25 +1,5 @@
-@import './var';
 @import './common';
+@import './mdui';
+@import './plugin';
 
 @import './format/json';
-
-html {
-  overflow: auto;
-  font-size: $codeSize;
-}
-
-a {
-  text-decoration: none;
-}
-
-#app {
-  // 更改插件 codemirror 的样式
-  .vue-codemirror .CodeMirror {
-    font-family: $codeFont;
-    font-size: $codeSize;
-
-    pre.CodeMirror-placeholder {
-      color: #999999;
-    }
-  }
-}
