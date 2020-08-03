@@ -1,6 +1,13 @@
 @import './var';
 
-// 插件 codemirror
+/*
+插件 codemirror 样式设置
+ */
+// 行高
+$lineHeight: 28px;
+//上下边距
+$padding: 8px;
+
 .vue-codemirror .CodeMirror {
   font-family: $codeFont;
   font-size: $codeSize;
@@ -8,4 +15,44 @@
   pre.CodeMirror-placeholder {
     color: #999999;
   }
+}
+
+.line-1 .CodeMirror {
+  height: $lineHeight + $padding !important;
+}
+
+.line-2 .CodeMirror {
+  height: $lineHeight * 2 + $padding !important;
+}
+
+.line-3 .CodeMirror {
+  height: $lineHeight * 3 + $padding !important;
+}
+
+.line-4 .CodeMirror {
+  height: $lineHeight * 4 + $padding !important;
+}
+
+.line-5 .CodeMirror {
+  height: $lineHeight * 5 + $padding !important;
+}
+
+.line-6 .CodeMirror {
+  height: $lineHeight * 6 + $padding !important;
+}
+
+.line-7 .CodeMirror {
+  height: $lineHeight * 7 + $padding !important;
+}
+
+.line-8 .CodeMirror {
+  height: $lineHeight * 8 + $padding !important;
+}
+
+.line-9 .CodeMirror {
+  height: $lineHeight * 9 + $padding !important;
+}
+
+.line-10 .CodeMirror {
+  height: $lineHeight * 10 + $padding !important;
 }

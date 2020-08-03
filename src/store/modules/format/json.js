@@ -46,7 +46,7 @@ export default {
     }
   },
   actions: {
-    // action - 增加存储的 json 数据
+    // action：增加存储的 json 数据
     acAddTab({ commit, state, dispatch }) {
       const { tabs } = state;
       const id = tabs[tabs.length - 1].id + 1;
@@ -54,22 +54,22 @@ export default {
       commit(ADD_TAB, { id, name, json: '' });
       dispatch('acUpdateActiveTab', id);
     },
-    // action - 更新已选中标签
+    // action：更新已选中标签
     acUpdateActiveTab({ commit }, id) {
       commit(UPDATE_ACTIVE_TAB_ID, id);
     },
-    // action - 更新 json 数据
+    // action：更新 json 数据
     acUpdateTab({ commit }, tab) {
       commit(UPDATE_TAB, tab);
     },
-    // action - 删除 json 数据
+    // action：删除 json 数据
     acDeleteTab({ commit, state, dispatch }, index) {
       commit(DELETE_TAB, index);
       const isLast = state.tabs.length === index;
       console.log(state);
       dispatch('acUpdateActiveTab', isLast ? state.tabs[index - 1].id : state.tabs[index].id);
     },
-    // action - 清空 json 数据
+    // action：清空 json 数据
     acClearTabs({ commit, dispatch }) {
       commit(CLEAR_TABS);
       dispatch('acUpdateActiveTab', defaultId);

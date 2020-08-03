@@ -1,17 +1,16 @@
 <template>
   <button
-    class="mdui-btn mdui-btn-raised mdui-btn-dense mdui-color-theme mdui-ripple copy-btn"
+    class="mdui-btn mdui-btn-dense mdui-text-color-theme-accent mdui-ripple copy-btn"
     v-clipboard:copy="value"
     v-clipboard:success="onCopy"
     @mouseenter="() => btn.open({ content: '复制' })"
     @mouseleave="() => btn.close()"
   >
-    <i class="mdui-icon material-icons">content_copy</i>
+    <i class="mdui-icon material-icons" style="margin-top: -4px;">content_copy</i>
   </button>
 </template>
 
 <script>
-import mdui from 'mdui';
 /**
  * 复制按钮组件
  */
@@ -28,7 +27,7 @@ export default {
     };
   },
   mounted() {
-    this.btn = new mdui.Tooltip('.copy-btn', { content: this.tipsDefault });
+    this.btn = new this.$Tooltip('.copy-btn', { content: this.tipsDefault });
   },
   methods: {
     onCopy() {

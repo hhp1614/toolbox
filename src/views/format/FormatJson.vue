@@ -1,11 +1,11 @@
 <template>
   <div id="format-json" class="mdui-row">
-    <div class="mdui-m-b-1">
+    <div>
       <div
         class="mdui-chip mdui-m-r-1"
         v-for="(item, index) in tabs"
         :key="index"
-        :class="{ 'mdui-color-theme': activeId === item.id }"
+        :class="{ 'mdui-text-color-theme-accent': activeId === item.id }"
         @click="changeTab(item.id)"
       >
         <div class="mdui-chip-title">{{ item.name }}</div>
@@ -13,34 +13,43 @@
           <i class="mdui-icon material-icons">cancel</i>
         </div>
       </div>
-      <div class="mdui-chip mdui-m-r-1">
-        <div class="mdui-chip-icon mdui-color-blue" mdui-tooltip="{content: '新建 tab'}" @click="addTab">
-          <i class="mdui-icon material-icons">add</i>
-        </div>
-      </div>
-      <div class="mdui-chip">
-        <div class="mdui-chip-icon mdui-color-red" mdui-tooltip="{content: '清空 tab'}" @click="clearTab">
-          <i class="mdui-icon material-icons">delete</i>
-        </div>
-      </div>
+      <mdui-btn
+        class="mdui-text-color-theme mdui-m-r-1"
+        mdui-tooltip="{content: '新建 tab'}"
+        @click="addTab"
+        icon
+        dense
+        ripple
+      >
+        <mdui-icon type="add" />
+      </mdui-btn>
+      <mdui-btn
+        class="mdui-text-color-red mdui-m-r-1"
+        mdui-tooltip="{content: '删除所有 tab'}"
+        @click="clearTab"
+        icon
+        dense
+        ripple
+      >
+        <mdui-icon type="delete" />
+      </mdui-btn>
     </div>
     <div class="mdui-col-xs-6">
-      <codemirror
-        v-model="jsonSource"
-        class="mdui-shadow-2"
-        :options="{ mode: 'application/json', theme: cmTheme }"
-        @input="inputJson"
-        placeholder="输入 JSON"
+      <editor v-model="jsonSource" mode="application/json" @input="inputJson" />
+    </div>
+    <div class="mdui-col-xs-6">
+      <vue-json-pretty
+        :data="jsonObject"
+        class="json-view mdui-m-t-1 mdui-shadow-2"
+        showLength
+        highlightMouseoverNode
       />
-    </div>
-    <div class="mdui-col-xs-6">
-      <vue-json-pretty :data="jsonObject" class="json-view mdui-shadow-2" showLength highlightMouseoverNode />
       <div class="mdui-m-t-1">
         <copy-btn :value="JSON.stringify(jsonObject, null, 2)" />
         <div class="mdui-btn-group">
-          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('default')">默认</button>
-          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('asc')">升序</button>
-          <button class="mdui-btn mdui-btn-dense mdui-ripple" @click="changeOrder('desc')">降序</button>
+          <mdui-btn @click="changeOrder('default')" dense ripple>默认</mdui-btn>
+          <mdui-btn @click="changeOrder('asc')" dense ripple>升序</mdui-btn>
+          <mdui-btn @click="changeOrder('desc')" dense ripple>降序</mdui-btn>
         </div>
       </div>
     </div>
@@ -50,14 +59,12 @@
 <script>
 import { mapActions, mapGetters, mapState } from 'vuex';
 import VueJsonPretty from 'vue-json-pretty';
-import 'codemirror/mode/javascript/javascript';
 import { isArray, isObject, isObjectLike, isPlainObject } from '@hhp1614/utils/lib/common/type';
 import { each, sort } from '@hhp1614/utils/lib/common/collection';
-import CopyBtn from '../../components/content/CopyBtn';
 
 export default {
   name: 'FormatJson',
-  components: { CopyBtn, VueJsonPretty },
+  components: { VueJsonPretty },
   data() {
     return {
       // 输入的 JSON
@@ -72,12 +79,13 @@ export default {
   },
   created() {
     this.jsonSource = this.tabs.find(i => i.id === this.activeId)?.json ?? '';
+    this.generateFromSource();
   },
   methods: {
     ...mapActions('format/json', ['acAddTab', 'acUpdateActiveTab', 'acUpdateTab', 'acClearTabs', 'acDeleteTab']),
     // 事件：输入 JSON
     inputJson() {
-      this['acUpdateTab']({ id: this.activeId, json: this.jsonSource });
+      this.acUpdateTab({ id: this.activeId, json: this.jsonSource });
       this.generateFromSource();
     },
     // 根据输入 JSON 生成对象
@@ -121,20 +129,20 @@ export default {
     changeTab(id) {
       // 优化
       if (id === this.activeId) return;
-      this.setJsonSource(this['acUpdateActiveTab'], id);
+      this.setJsonSource(this.acUpdateActiveTab, id);
     },
     // 事件：增加 tab
     addTab() {
-      this.setJsonSource(this['acAddTab']);
+      this.setJsonSource(this.acAddTab);
     },
     // 事件：删除 tab
     deleteTab(index) {
       if (this.tabs.length <= 1) return;
-      this.setJsonSource(this['acDeleteTab'], index);
+      this.setJsonSource(this.acDeleteTab, index);
     },
     // 事件：清空 tab
     clearTab() {
-      this.setJsonSource(this['acClearTabs']);
+      this.setJsonSource(this.acClearTabs);
     },
     // 事件：排序 default-默认 asc-升序 desc-降序
     changeOrder(order) {

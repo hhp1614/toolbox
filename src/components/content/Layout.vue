@@ -1,31 +1,32 @@
 <template>
-  <div class="mdui-appbar-with-toolbar mdui-drawer-body-left">
+  <div class="mdui-appbar-with-toolbar">
     <!-- 应用栏 -->
     <header class="mdui-appbar mdui-appbar-fixed">
       <div class="mdui-toolbar mdui-color-theme">
-        <button class="mdui-btn mdui-btn-icon mdui-ripple" @click="() => drawer.toggle()">
-          <i class="mdui-icon material-icons">menu</i>
-        </button>
+        <mdui-btn @click="() => drawer.toggle()" icon ripple>
+          <mdui-icon type="menu" />
+        </mdui-btn>
         <router-link class="mdui-typo-headline" to="/">Toolbox</router-link>
         <span class="mdui-typo-title">工具箱</span>
         <div class="mdui-toolbar-spacer"></div>
-        <button
-          id="toggle-dark"
+        <mdui-btn
+          ref="toggleDark"
           class="mdui-btn mdui-btn-icon"
+          @click="toggleDark"
           @mouseenter="() => toggleDarkBtn.open({ content: tooltipContent })"
           @mouseleave="() => toggleDarkBtn.close()"
-          @click="toggleDark"
+          icon
         >
-          <i class="mdui-icon material-icons">{{ dark ? 'brightness_4' : 'brightness_7' }}</i>
-        </button>
-        <button class="mdui-btn mdui-btn-icon" mdui-tooltip="{content: '关于'}">
-          <i class="mdui-icon material-icons">info</i>
-        </button>
+          <mdui-icon :type="dark ? 'brightness_4' : 'brightness_7'" />
+        </mdui-btn>
+        <mdui-btn mdui-tooltip="{content: '关于'}" icon>
+          <mdui-icon type="info" />
+        </mdui-btn>
       </div>
     </header>
     <!-- 导航栏 -->
-    <div id="drawer" class="mdui-drawer mdui-shadow-6">
-      <div id="collapse" class="mdui-list" mdui-collapse>
+    <div ref="drawer" class="mdui-drawer mdui-shadow-6">
+      <div ref="collapse" class="mdui-list" mdui-collapse>
         <div
           class="mdui-collapse-item mdui-collapse-item-open"
           v-for="(item, index) in pages"
@@ -47,7 +48,7 @@
               exact-active-class="mdui-list-item-active"
               v-for="(child, key) in item.children"
               :key="key"
-              :to="`${item.type}/${child.type}`"
+              :to="`/${item.type}/${child.type}`"
               exact
             >
               <div class="mdui-list-item-content">
@@ -69,9 +70,8 @@
 
 <script>
 import { mapActions, mapState } from 'vuex';
-import mdui from 'mdui';
 import { isEmptyObject } from '@hhp1614/utils/lib/common/type';
-import { pages } from '../../router/pageRoutes';
+import { pages } from '@/router/pageRoutes';
 
 /**
  * 布局组件
@@ -106,17 +106,17 @@ export default {
     }
   },
   mounted() {
+    this.drawer = new this.$Drawer(this.$refs.drawer);
+    this.collapse = new this.$Collapse(this.$refs.collapse);
+    this.toggleDarkBtn = new this.$Tooltip(this.$refs.toggleDark.$el, { content: this.tooltipContent });
     this.setTitle(this.$route.meta);
-    this.drawer = new mdui.Drawer('#drawer');
-    this.collapse = new mdui.Collapse('#collapse');
-    this.toggleDarkBtn = new mdui.Tooltip('#toggle-dark', { content: this.tooltipContent });
     this.setTheme();
   },
   methods: {
     ...mapActions(['acToggleDark']),
     // 切换深色主题
     toggleDark() {
-      this['acToggleDark']().then(() => {
+      this.acToggleDark().then(() => {
         this.toggleDarkBtn.close();
         this.toggleDarkBtn.open({ content: this.tooltipContent });
         this.setTheme();
@@ -130,8 +130,7 @@ export default {
     setTheme() {
       const rc = this.dark ? 'light' : 'dark';
       const ac = this.dark ? 'dark' : 'light';
-      mdui
-        .$('body')
+      this.$$('body')
         .removeClass(`mdui-theme-layout-${rc}`)
         .addClass(`mdui-theme-layout-${ac}`);
     }

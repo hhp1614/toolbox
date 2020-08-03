@@ -12,33 +12,43 @@ Made with ❤️ by hhp1614
 
 `);
 import Vue from 'vue';
+// MDUI
 import mdui from 'mdui';
-import VueClipboard from 'vue-clipboard2';
-import VueCodemirror from 'vue-codemirror';
-import 'codemirror/addon/display/placeholder';
-import App from './App.vue';
-import router from './router';
-import store from './store';
 import 'mdui/dist/css/mdui.css';
+// vue-codemirror
+import VueCodemirror from 'vue-codemirror';
+// codemirror 代码高亮
+import 'codemirror/mode/javascript/javascript';
+// codemirror 主题样式
 import 'codemirror/lib/codemirror.css';
 import 'codemirror/theme/monokai.css';
+// 剪贴板
+import VueClipboard from 'vue-clipboard2';
+
+import App from './App';
+import router from './router';
+import store from './store';
+import mduiPlugin from './plugins/mduiPlugin';
+import globalComponent from '@/plugins/globalComponent';
 import './scss/main.scss';
 
 // 黑色主题
-// mdui.$('body').addClass('mdui-theme-layout-auto');
-mdui.$('body').addClass('mdui-theme-primary-indigo mdui-theme-accent-pink');
-window.aaa = true;
+mdui.$('body').addClass('mdui-theme-primary-indigo mdui-theme-accent-indigo mdui-drawer-body-left');
+
+// 绑定 mdui 全局方法，将 mdui 下的方法和类绑定到 Vue.prototype
+// 写法：mdui.name => this.$name
+Vue.use(mduiPlugin);
+
+// 注册 components/content/global 目录下的组件为全局组件
+Vue.use(globalComponent);
+
+// 代码编辑器
+Vue.use(VueCodemirror);
+
 // 剪贴板
 Vue.use(VueClipboard);
-// 代码编辑器
-Vue.use(VueCodemirror, {
-  options: {
-    tabSize: 2,
-    lineNumbers: true,
-    lineWrapping: true
-  }
-});
 
+// 关闭生产环境提示
 Vue.config.productionTip = false;
 
 new Vue({

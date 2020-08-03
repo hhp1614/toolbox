@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { Local } from '@hhp1614/utils/lib/browser/storage';
 import format from './modules/format';
+import crypto from './modules/crypto';
 
 Vue.use(Vuex);
 
@@ -14,11 +15,6 @@ export default new Vuex.Store({
     // 是否设置深色主题
     dark: Local.get('dark') || false
   },
-  getters: {
-    cmTheme: state => {
-      return state.dark ? 'monokai' : 'default';
-    }
-  },
   mutations: {
     [TOGGLE_DARK](state) {
       state.dark = !state.dark;
@@ -26,10 +22,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    // action - 切换深色主题
+    // action：切换深色主题
     acToggleDark({ commit }) {
       commit(TOGGLE_DARK);
     }
   },
-  modules: { format }
+  modules: { format, crypto }
 });
