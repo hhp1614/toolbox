@@ -40,15 +40,28 @@ export const pages = [
       },
       {
         type: 'hash',
-        title: '哈希',
+        title: '哈希散列',
         subtitle: 'MD5 / SHA ...',
         component: () => import('../views/crypto/Hash')
       },
       {
         type: 'encrypt',
-        title: '加密',
+        title: '加解密',
         subtitle: 'AES / DES / RC4 ...',
         component: () => import('../views/crypto/Encrypt')
+      }
+    ]
+  },
+  {
+    type: 'image',
+    icon: 'image',
+    title: '图片相关',
+    children: [
+      {
+        type: 'data-uri',
+        title: 'Data URI',
+        subtitle: '图片 ⇔ Base64 URI',
+        component: () => import('../views/image/DataUri')
       }
     ]
   }

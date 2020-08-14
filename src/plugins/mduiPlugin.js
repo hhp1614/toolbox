@@ -1,7 +1,7 @@
 import mdui from 'mdui';
 import { each } from '@hhp1614/utils/lib/common/collection';
 
-const map = {
+const plugins = {
   /**
    * 根据 HTML 字符串或 CSS 选择器创建 JQ 对象
    */
@@ -31,6 +31,12 @@ const map = {
    */
   $Select: mdui.Select,
   /**
+   * Tab 选项卡组件
+   * @description 请通过 `new this.$Tab()` 调用
+   * @type mdui.Tab
+   */
+  $Tab: mdui.Tab,
+  /**
    * 打开一个 Snackbar
    * @typeof {mdui.snackbar}
    */
@@ -43,7 +49,7 @@ const map = {
 export default {
   install(Vue) {
     const proto = {};
-    each(map, (value, key) => {
+    each(plugins, (value, key) => {
       proto[key] = { value };
     });
     Object.defineProperties(Vue.prototype, proto);

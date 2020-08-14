@@ -4,8 +4,8 @@
 插件 codemirror 样式设置
  */
 // 行高
-$lineHeight: 28px;
-//上下边距
+$lineHeight: $codeSize * 1.8;
+// 上下边距
 $padding: 8px;
 
 .vue-codemirror .CodeMirror {

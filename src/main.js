@@ -29,7 +29,8 @@ import App from './App';
 import router from './router';
 import store from './store';
 import mduiPlugin from './plugins/mduiPlugin';
-import globalComponent from '@/plugins/globalComponent';
+import globalComponent from './plugins/globalComponent';
+import globalFilters from '@/plugins/globalFilters';
 import './scss/main.scss';
 
 // 黑色主题
@@ -41,6 +42,8 @@ Vue.use(mduiPlugin);
 
 // 注册 components/content/global 目录下的组件为全局组件
 Vue.use(globalComponent);
+
+Vue.use(globalFilters);
 
 // 代码编辑器
 Vue.use(VueCodemirror);

@@ -8,10 +8,10 @@
         :class="{ 'mdui-text-color-theme-accent': activeId === item.id }"
         @click="changeTab(item.id)"
       >
-        <div class="mdui-chip-title">{{ item.name }}</div>
-        <div class="mdui-chip-delete" @click.stop="deleteTab(index)">
+        <span class="mdui-chip-title">{{ item.name }}</span>
+        <span class="mdui-chip-delete" @click.stop="deleteTab(index)">
           <i class="mdui-icon material-icons">cancel</i>
-        </div>
+        </span>
       </div>
       <mdui-btn
         class="mdui-text-color-theme mdui-m-r-1"

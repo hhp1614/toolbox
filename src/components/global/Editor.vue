@@ -9,6 +9,7 @@
       :value="value"
       :options="{ mode, readOnly, lineNumbers, tabSize, lineWrapping, theme: cmTheme }"
       @input="onInput"
+      @mousedown="onClick"
     />
   </div>
 </template>
@@ -47,6 +48,9 @@ export default {
   methods: {
     onInput(value) {
       this.$emit('input', value);
+    },
+    onClick(e) {
+      e.preventDefault();
     }
   }
 };

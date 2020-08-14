@@ -1,8 +1,10 @@
 <template>
   <div class="mdui-row">
     <div class="mdui-chip">
-      <div class="mdui-chip-icon mdui-color-amber-accent"><mdui-icon type="info" /></div>
-      <div class="mdui-chip-title">哈希计算是不可逆的</div>
+      <span class="mdui-chip-icon mdui-color-amber-accent">
+        <mdui-icon type="info" />
+      </span>
+      <span class="mdui-chip-title">哈希计算是不可逆的</span>
     </div>
     <editor class="line-5" label="明文" :value="beforeCoding" @input="acUpdateBeforeCoding" />
     <editor v-if="useSecret" class="line-1" label="秘钥" :value="secret" @input="acUpdateSecret" />

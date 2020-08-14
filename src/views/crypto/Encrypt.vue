@@ -50,7 +50,7 @@ export default {
     decrypt() {
       const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret);
       if (bytes.sigBytes >= 0) {
-        const beforeCoding = bytes.toString(Crypto.enc.Utf8);
+        const beforeCoding = Crypto.enc.Utf8.stringify(bytes);
         this.acUpdateBeforeCoding(beforeCoding);
       } else {
         this.$snackbar('解密失败，信息有误');
