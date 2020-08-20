@@ -1,6 +1,6 @@
 <template>
   <label class="mdui-checkbox mdui-p-l-3 mdui-m-l-2">
-    <input type="checkbox" :checked="value" @change="$emit('change', $event.target.checked)" />
+    <input type="checkbox" :checked="checked" :disabled="disabled" @change="$emit('change', $event.target.checked)" />
     <i class="mdui-checkbox-icon"></i>
     {{ label }}
   </label>
@@ -12,9 +12,14 @@
  */
 export default {
   name: 'MduiCheckbox',
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
   props: {
-    value: { type: Boolean, required: true },
-    label: { type: String, default: '' }
+    checked: { type: Boolean, required: true },
+    label: { type: String, default: '' },
+    disabled: { type: Boolean, default: false }
   }
-};
+}
 </script>

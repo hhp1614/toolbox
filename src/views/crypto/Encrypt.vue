@@ -18,8 +18,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import Crypto from 'crypto-js';
+import { mapActions, mapState } from 'vuex'
+import Crypto from 'crypto-js'
 
 export default {
   name: 'Crypto',
@@ -27,35 +27,35 @@ export default {
     return {
       select: null,
       modeList: ['AES', 'DES', 'RC4', 'RC4Drop', 'Rabbit', 'RabbitLegacy', 'TripleDES']
-    };
+    }
   },
   computed: {
     ...mapState('crypto/encrypt', ['beforeCoding', 'afterCoding', 'mode', 'secret'])
   },
   mounted() {
-    this.select = new this.$Select(this.$refs.select);
+    this.select = new this.$Select(this.$refs.select)
   },
   methods: {
     ...mapActions('crypto/encrypt', ['acUpdateBeforeCoding', 'acUpdateAfterCoding', 'acUpdateMode', 'acUpdateSecret']),
     // 加密
     encrypt() {
       try {
-        const afterCoding = Crypto[this.mode].encrypt(this.beforeCoding, this.secret).toString();
-        this.acUpdateAfterCoding(afterCoding);
+        const afterCoding = Crypto[this.mode].encrypt(this.beforeCoding, this.secret).toString()
+        this.acUpdateAfterCoding(afterCoding)
       } catch {
-        this.$snackbar('加密失败');
+        this.$snackbar('加密失败')
       }
     },
     // 解密
     decrypt() {
-      const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret);
+      const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret)
       if (bytes.sigBytes >= 0) {
-        const beforeCoding = Crypto.enc.Utf8.stringify(bytes);
-        this.acUpdateBeforeCoding(beforeCoding);
+        const beforeCoding = Crypto.enc.Utf8.stringify(bytes)
+        this.acUpdateBeforeCoding(beforeCoding)
       } else {
-        this.$snackbar('解密失败，信息有误');
+        this.$snackbar('解密失败，信息有误')
       }
     }
   }
-};
+}
 </script>

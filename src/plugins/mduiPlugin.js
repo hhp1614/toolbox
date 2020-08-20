@@ -1,5 +1,5 @@
-import mdui from 'mdui';
-import { each } from '@hhp1614/utils/lib/common/collection';
+import mdui from 'mdui'
+import { each } from '@hhp1614/utils/lib/common/collection'
 
 const plugins = {
   /**
@@ -41,17 +41,17 @@ const plugins = {
    * @typeof {mdui.snackbar}
    */
   $snackbar: mdui.snackbar
-};
+}
 
 /**
  * MDUI 全局类或方法
  */
 export default {
   install(Vue) {
-    const proto = {};
+    const proto = {}
     each(plugins, (value, key) => {
-      proto[key] = { value };
-    });
-    Object.defineProperties(Vue.prototype, proto);
+      proto[key] = { value }
+    })
+    Object.defineProperties(Vue.prototype, proto)
   }
-};
+}

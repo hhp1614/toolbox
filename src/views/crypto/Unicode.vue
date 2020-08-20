@@ -16,19 +16,19 @@
         <mdui-checkbox
           mdui-tooltip="{content: '不勾选时，英文数字以及不需要转义的字符不会被编码'}"
           label="全部编码"
-          :value="htmlEntity.allCoding"
+          :checked="htmlEntity.allCoding"
           @change="acUpdateHtmlEntity('allCoding')"
         />
         <mdui-checkbox
           mdui-tooltip="{content: '&#x26;#xA9; =&#x3E; &#x26;#169;'}"
           label="编码使用十进制表示"
-          :value="htmlEntity.decimal"
+          :checked="htmlEntity.decimal"
           @change="acUpdateHtmlEntity('decimal')"
         />
         <mdui-checkbox
           mdui-tooltip="{content: '&#x26;#x26; => &#x26;amp;'}"
           label="编码使用实体名称"
-          :value="htmlEntity.entity"
+          :checked="htmlEntity.entity"
           @change="acUpdateHtmlEntity('entity')"
         />
       </template>
@@ -36,7 +36,7 @@
         <mdui-checkbox
           mdui-tooltip="{content: '不勾选时，英文数字以及不需要转义的字符不会被编码'}"
           label="全部编码"
-          :value="unicode.allCoding"
+          :checked="unicode.allCoding"
           @change="acUpdateUnicode('allCoding')"
         />
       </template>
@@ -46,15 +46,15 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import he from 'he';
+import { mapActions, mapState } from 'vuex'
+import he from 'he'
 
 export default {
   name: 'CryptoUnicode',
   data() {
     return {
       select: null
-    };
+    }
   },
   computed: {
     ...mapState('crypto/unicode', ['beforeCoding', 'afterCoding', 'htmlEntity', 'unicode', 'mode']),
@@ -63,11 +63,11 @@ export default {
         encodeEverything: this.htmlEntity.allCoding,
         decimal: this.htmlEntity.decimal,
         useNamedReferences: this.htmlEntity.entity
-      };
+      }
     }
   },
   mounted() {
-    this.select = new this.$Select(this.$refs.select);
+    this.select = new this.$Select(this.$refs.select)
   },
   methods: {
     ...mapActions('crypto/unicode', [
@@ -81,14 +81,14 @@ export default {
     encode() {
       switch (this.mode) {
         case 'htmlEntity': {
-          const afterCoding = he.encode(this.beforeCoding, this.heOptions);
-          this.acUpdateAfterCoding(afterCoding);
-          break;
+          const afterCoding = he.encode(this.beforeCoding, this.heOptions)
+          this.acUpdateAfterCoding(afterCoding)
+          break
         }
         case 'unicode': {
-          const afterCoding = this.unicodeEncode(this.beforeCoding);
-          this.acUpdateAfterCoding(afterCoding);
-          break;
+          const afterCoding = this.unicodeEncode(this.beforeCoding)
+          this.acUpdateAfterCoding(afterCoding)
+          break
         }
       }
     },
@@ -97,46 +97,46 @@ export default {
       switch (this.mode) {
         case 'htmlEntity': {
           try {
-            const beforeCoding = he.decode(this.afterCoding, this.heOptions);
-            this.acUpdateBeforeCoding(beforeCoding);
+            const beforeCoding = he.decode(this.afterCoding, this.heOptions)
+            this.acUpdateBeforeCoding(beforeCoding)
           } catch {
-            this.$snackbar('编码失败');
+            this.$snackbar('编码失败')
           }
-          break;
+          break
         }
         case 'unicode': {
           try {
-            const beforeCoding = this.unicdoeDecode(this.afterCoding);
-            this.acUpdateBeforeCoding(beforeCoding);
+            const beforeCoding = this.unicdoeDecode(this.afterCoding)
+            this.acUpdateBeforeCoding(beforeCoding)
           } catch {
-            this.$snackbar('解码失败');
+            this.$snackbar('解码失败')
           }
-          break;
+          break
         }
       }
     },
     // Unicode 编码
     unicodeEncode(value) {
-      let result = '';
+      let result = ''
       for (let i = 0; i < value.length; i++) {
-        const code = value.charCodeAt(i);
+        const code = value.charCodeAt(i)
         if (!this.unicode.allCoding && 32 <= code && code <= 126) {
           // 排除英文，数字及不需要转义的字符
-          result += value[i];
+          result += value[i]
         } else {
-          const str = code.toString(16);
-          result += '\\u' + str.slice(-4).padStart(4, '0');
+          const str = code.toString(16)
+          result += '\\u' + str.slice(-4).padStart(4, '0')
         }
       }
-      return result;
+      return result
     },
     // Unicode 解码
     unicdoeDecode(value) {
       return value.replace(/(\\)?\\u/g, '\\u').replace(/\\u[\da-f]{4}/gi, match => {
-        const code = Number('0x' + match.substring(2));
-        return String.fromCodePoint(code);
-      });
+        const code = Number('0x' + match.substring(2))
+        return String.fromCodePoint(code)
+      })
     }
   }
-};
+}
 </script>

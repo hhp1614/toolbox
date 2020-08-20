@@ -5,10 +5,10 @@
 </template>
 
 <script>
-import Layout from './components/content/Layout';
+import Layout from './components/content/Layout'
 
 export default {
   name: 'App',
   components: { Layout }
-};
+}
 </script>

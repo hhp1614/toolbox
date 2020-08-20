@@ -44,11 +44,11 @@
           <mdui-icon type="keyboard_arrow_down" />转换
         </mdui-btn>
       </div>
-      <editor v-model="dataURI" class="line-10" label="Data URI" :line-numbers="false" read-only />
+      <editor class="line-10" v-model="dataURI" label="Data URI" :line-numbers="false" read-only />
     </div>
     <!-- URI 转图片 -->
     <div id="uri2image">
-      <editor v-model="inputURI" class="line-10" label="Data URI" :line-numbers="false" />
+      <editor class="line-10" v-model="inputURI" label="Data URI" :line-numbers="false" />
       <div class="mdui-m-y-2">
         <mdui-btn class="mdui-m-r-2" color="theme-accent" @click="checkURI" :disabled="!file" raised ripple>
           <mdui-icon type="keyboard_arrow_down" />转换
@@ -67,7 +67,7 @@
 </template>
 
 <script>
-import { Base64 } from 'js-base64';
+import { Base64 } from 'js-base64'
 
 export default {
   name: 'DataUri',
@@ -78,42 +78,42 @@ export default {
       dataURI: '',
       inputURI: '',
       imgURI: ''
-    };
+    }
   },
   computed: {
     blobURL() {
-      return this.file ? window.URL.createObjectURL(this.file) : '';
+      return this.file ? window.URL.createObjectURL(this.file) : ''
     }
   },
   mounted() {
-    this.tab = new this.$Tab(this.$refs.tab);
+    this.tab = new this.$Tab(this.$refs.tab)
   },
   methods: {
     // 选择图片
     selectImage(e) {
-      this.file = e.target.files[0];
+      this.file = e.target.files[0]
     },
     // 图片转换成 URI
     getDataURI() {
-      const fr = new FileReader();
-      fr.readAsBinaryString(this.file);
+      const fr = new FileReader()
+      fr.readAsBinaryString(this.file)
       fr.onload = () => {
-        this.dataURI = `data:${this.file.type};base64,${Base64.btoa(String(fr.result))}`;
-      };
+        this.dataURI = `data:${this.file.type};base64,${Base64.btoa(String(fr.result))}`
+      }
     },
     // DataURI 转换成图片
     checkURI() {
-      if (/^data:image\/.+;base64,/.exec(this.inputURI)) {
-        this.imgURI = this.inputURI;
-        return;
+      if (/^data:image\/.+;base64,/.test(this.inputURI)) {
+        this.imgURI = this.inputURI
+        return
       }
-      this.$snackbar('Data URI 格式错误');
+      this.$snackbar('Data URI 格式错误')
     },
     // 图片加载失败
     loadError() {
-      this.imgURI = '';
-      this.$snackbar('Data URI 无法解析');
+      this.imgURI = ''
+      this.$snackbar('Data URI 无法解析')
     }
   }
-};
+}
 </script>

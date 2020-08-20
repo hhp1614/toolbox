@@ -62,13 +62,19 @@ export const pages = [
         title: 'Data URI',
         subtitle: '图片 ⇔ Base64 URI',
         component: () => import('../views/image/DataUri')
+      },
+      {
+        type: 'png-to-ico',
+        title: 'PNG 转 ICO',
+        subtitle: 'favicon 制作',
+        component: () => import('../views/image/PngToIco')
       }
     ]
   }
-];
+]
 
 // 路由表扁平化
-const routes = [];
+const routes = []
 pages.forEach(i => {
   i.children.forEach(j => {
     routes.push({
@@ -79,11 +85,11 @@ pages.forEach(i => {
         title: j.title,
         subtitle: j.subtitle
       }
-    });
-  });
-});
+    })
+  })
+})
 
 /**
  * 导航路由
  */
-export const pageRoutes = routes;
+export const pageRoutes = routes

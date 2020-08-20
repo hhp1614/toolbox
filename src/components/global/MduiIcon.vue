@@ -12,5 +12,5 @@ export default {
     // 图标名称
     type: { type: String, required: true }
   }
-};
+}
 </script>

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
 /**
  * 编辑器组件
@@ -42,16 +42,16 @@ export default {
     ...mapState(['dark']),
     // codemirror 主题
     cmTheme() {
-      return this.dark ? 'monokai' : 'default';
+      return this.dark ? 'monokai' : 'default'
     }
   },
   methods: {
     onInput(value) {
-      this.$emit('input', value);
+      this.$emit('input', value)
     },
     onClick(e) {
-      e.preventDefault();
+      e.preventDefault()
     }
   }
-};
+}
 </script>

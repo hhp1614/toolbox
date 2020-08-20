@@ -15,7 +15,7 @@
       <select ref="select" :value="mode" class="mdui-select" @change="acUpdateMode($event.target.value)" mdui-select>
         <option v-for="(item, index) in modeList" :key="index" :value="item">{{ item }}</option>
       </select>
-      <mdui-checkbox label="Hmac" :value="useSecret" @change="acUpdateUseSecret" />
+      <mdui-checkbox label="Hmac" :checked="useSecret" @change="acUpdateUseSecret" />
     </action-bar>
     <editor
       class="line-5"
@@ -29,8 +29,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex';
-import Crypto from 'crypto-js';
+import { mapActions, mapState } from 'vuex'
+import Crypto from 'crypto-js'
 
 export default {
   name: 'Hash',
@@ -38,13 +38,13 @@ export default {
     return {
       select: null,
       modeList: ['MD5', 'SHA1', 'SHA256', 'SHA224', 'SHA512', 'SHA384', 'SHA3', 'RIPEMD160']
-    };
+    }
   },
   computed: {
     ...mapState('crypto/hash', ['beforeCoding', 'afterCoding', 'mode', 'useSecret', 'secret'])
   },
   mounted() {
-    this.select = new this.$Select(this.$refs.select);
+    this.select = new this.$Select(this.$refs.select)
   },
   methods: {
     ...mapActions('crypto/hash', [
@@ -57,14 +57,14 @@ export default {
     // 计算
     compute() {
       try {
-        const hmac = this.useSecret ? 'Hmac' : '';
-        const secret = this.useSecret ? this.secret : undefined;
-        const hash = Crypto[hmac + this.mode](this.beforeCoding, secret).toString();
-        this.acUpdateAfterCoding(hash);
+        const hmac = this.useSecret ? 'Hmac' : ''
+        const secret = this.useSecret ? this.secret : undefined
+        const hash = Crypto[hmac + this.mode](this.beforeCoding, secret).toString()
+        this.acUpdateAfterCoding(hash)
       } catch {
-        this.$snackbar('计算失败');
+        this.$snackbar('计算失败')
       }
     }
   }
-};
+}
 </script>
