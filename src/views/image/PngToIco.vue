@@ -63,9 +63,9 @@
         下载
       </mdui-btn>
     </div>
-    <div class="mdui-m-t-2">
+    <div class="mdui-m-t-2" v-if="icoUrl">
       <label class="mdui-textfield-label">效果预览</label>
-      <img alt="效果预览" class="mdui-shadow-3" v-if="icoUrl" :src="icoUrl" />
+      <img alt="效果预览" class="mdui-shadow-3" :src="icoUrl" />
     </div>
     <a style="display: none;" ref="download" :href="icoUrl" :download="icoName"></a>
   </div>
