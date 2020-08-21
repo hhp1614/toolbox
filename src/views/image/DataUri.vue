@@ -8,10 +8,14 @@
     <div id="image2uri">
       <div class="mdui-m-y-2">
         <input type="file" id="select-image" accept="image/*" @change="selectImage" hidden />
-        <label for="select-image" class="mdui-btn mdui-btn-raised mdui-ripple">
+        <label for="select-image" class="mdui-btn mdui-btn-raised mdui-ripple mdui-color-theme">
           选择图片
         </label>
         <template v-if="file">
+          <mdui-btn class="mdui-m-l-2" color="red-600" @click="file = null" raised ripple>
+            <mdui-icon type="delete" />
+            删除图片
+          </mdui-btn>
           <div class="mdui-chip mdui-m-l-2">
             <span class="mdui-chip-icon mdui-color-red-600">
               <mdui-icon type="attach_file" />
@@ -39,6 +43,7 @@
         style="max-height: 200px; max-width: 100%"
         class="mdui-shadow-3"
       />
+      <paste-image @paste="pasteImage" v-else />
       <div class="mdui-m-y-2">
         <mdui-btn class="mdui-m-r-2" color="theme-accent" @click="getDataURI" :disabled="!file" raised ripple>
           <mdui-icon type="keyboard_arrow_down" />转换
@@ -55,11 +60,11 @@
         </mdui-btn>
       </div>
       <img
-        v-if="imgURI"
-        :src="imgURI"
         alt="预览图片"
         style="max-height: 200px; max-width: 100%"
         class="mdui-shadow-3"
+        v-if="imgURI"
+        :src="imgURI"
         @error="loadError"
       />
     </div>
@@ -92,6 +97,10 @@ export default {
     // 选择图片
     selectImage(e) {
       this.file = e.target.files[0]
+    },
+    // 粘贴图片
+    pasteImage(file) {
+      this.file = file
     },
     // 图片转换成 URI
     getDataURI() {
