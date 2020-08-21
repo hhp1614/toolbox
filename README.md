@@ -1,24 +1,7 @@
-# toolbox
+# 工具箱
 
-## Project setup
-```
-yarn install
-```
+纯前端实现的工具箱，没有依赖后端，使用 Page 服务部署
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+[GitHub Pages](https://hhp1614.github.io/toolbox)
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[Gitee Pages](https://hhp1614.gitee.io/toolbox)
