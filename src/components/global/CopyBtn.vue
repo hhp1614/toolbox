@@ -17,7 +17,7 @@
 export default {
   name: 'CopyBtn',
   props: {
-    value: { type: String, default: '' }
+    value: String
   },
   data() {
     return {

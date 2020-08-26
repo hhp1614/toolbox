@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import { Local } from '@hhp1614/utils/lib/browser/storage'
 import format from './modules/format'
 import crypto from './modules/crypto'
+import image from './modules/image'
 
 Vue.use(Vuex)
 
@@ -27,5 +28,5 @@ export default new Vuex.Store({
       commit(TOGGLE_DARK)
     }
   },
-  modules: { format, crypto }
+  modules: { format, crypto, image }
 })

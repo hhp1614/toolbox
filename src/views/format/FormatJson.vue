@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import VueJsonPretty from 'vue-json-pretty'
 import { isArray, isObject, isObjectLike, isPlainObject } from '@hhp1614/utils/lib/common/type'
 import { each, sort } from '@hhp1614/utils/lib/common/collection'
@@ -74,8 +74,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('format/json', ['tabs', 'activeId']),
-    ...mapGetters(['cmTheme'])
+    ...mapState('format/json', ['tabs', 'activeId'])
   },
   created() {
     this.jsonSource = this.tabs.find(i => i.id === this.activeId)?.json ?? ''

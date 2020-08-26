@@ -1,29 +1,29 @@
 <template>
-  <label class="mdui-checkbox mdui-p-l-3 mdui-m-l-2">
-    <input type="checkbox" v-model="checkboxModel" :value="value" :disabled="disabled" />
-    <i class="mdui-checkbox-icon"></i>
+  <label class="mdui-radio mdui-p-l-3 mdui-m-l-2">
+    <input type="radio" v-model="radioModel" :value="value" :disabled="disabled" />
+    <i class="mdui-radio-icon"></i>
     {{ label }}
   </label>
 </template>
 
 <script>
 /**
- * MDUI 多选框组件
+ * MDUI 单选框组件
  */
 export default {
-  name: 'MduiCheckbox',
+  name: 'MduiRadio',
   model: {
     prop: 'checked',
     event: 'change'
   },
   props: {
-    checked: [Boolean, Array],
+    checked: [Boolean, Number, String],
     value: [Number, String],
     label: [Number, String],
     disabled: Boolean
   },
   computed: {
-    checkboxModel: {
+    radioModel: {
       get() {
         return this.checked
       },

@@ -10,7 +10,7 @@ export default {
   name: 'MduiIcon',
   props: {
     // 图标名称
-    type: { type: String, required: true }
+    type: String
   }
 }
 </script>

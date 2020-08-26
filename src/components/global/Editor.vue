@@ -24,11 +24,11 @@ export default {
   name: 'Editor',
   props: {
     // 代码
-    value: { type: String, default: '' },
+    value: String,
     // 代码语法
     mode: { default: null },
     // 只读
-    readOnly: { type: Boolean, default: false },
+    readOnly: Boolean,
     // 显示行号
     lineNumbers: { type: Boolean, default: true },
     // 缩进
@@ -36,7 +36,7 @@ export default {
     // 自动换行
     lineWrapping: { type: Boolean, default: true },
     // 标签
-    label: { type: String }
+    label: String
   },
   computed: {
     ...mapState(['dark']),

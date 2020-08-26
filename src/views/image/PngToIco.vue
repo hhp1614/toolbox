@@ -6,7 +6,7 @@
         选择图片
       </label>
       <template v-if="file">
-        <mdui-btn class="mdui-m-l-2" color="red-600" @click="file = null" raised ripple>
+        <mdui-btn class="mdui-m-l-2" color="red-600" @click="acUpdateFile(null)" raised ripple>
           <mdui-icon type="delete" />
           删除图片
         </mdui-btn>
@@ -32,26 +32,26 @@
     </div>
     <div class="mdui-m-t-2">
       尺寸：
-      <label class="mdui-checkbox mdui-p-l-3 mdui-m-l-2" v-for="i in sizeList" :key="i">
-        <input type="checkbox" :value="i" v-model="size" />
-        <i class="mdui-checkbox-icon"></i>
-        {{ i }}
-      </label>
+      <mdui-checkbox v-for="i in sizeList" :key="i" :label="i" :value="i" :checked="size" @change="acUpdateSize" />
     </div>
     <div class="mdui-m-t-2">
       形状：
-      <label class="mdui-radio mdui-p-l-3 mdui-m-l-2" v-for="i in shapeList" :key="i.value">
-        <input type="radio" :value="i.value" v-model="shape" @change="shape !== 'fillet' && (bleed = false)" />
-        <i class="mdui-radio-icon"></i>
-        {{ i.name }}
-      </label>
+      <mdui-radio
+        v-for="i in shapeList"
+        :key="i.value"
+        :label="i.name"
+        :value="i.value"
+        :checked="shape"
+        @change="changeShape"
+      />
       <br />
       留白：
       <mdui-checkbox
-        v-model="bleed"
         mdui-tooltip="{content: '此选项只在形状为“圆角矩形”时生效', position: 'right'}"
         label="启用"
+        :checked="bleed"
         :disabled="shape !== 'fillet'"
+        @change="acUpdateBleed"
       />
     </div>
     <img
@@ -77,39 +77,52 @@
 </template>
 
 <script>
+import { mapActions, mapState } from 'vuex'
 import imageToIco from '@/utils/imageToIco'
 
 export default {
   name: 'PngToIco',
   data() {
     return {
-      file: null,
+      // 尺寸列表
       sizeList: [16, 32, 48, 96, 128, 256, 512],
-      size: [16, 96, 256],
+      // 形状列表
       shapeList: [
         { value: 'square', name: '正方形' },
         { value: 'circle', name: '圆形' },
         { value: 'fillet', name: '圆角矩形' }
-      ],
-      shape: 'square',
-      bleed: false,
-      icoUrl: '',
-      icoName: ''
+      ]
     }
   },
   computed: {
+    ...mapState('image/pngToIco', ['file', 'size', 'shape', 'bleed', 'icoUrl', 'icoName']),
+    // 图片转成的 URL
     blobURL() {
       return this.file ? window.URL.createObjectURL(this.file) : ''
     }
   },
   methods: {
+    ...mapActions('image/pngToIco', [
+      'acUpdateFile',
+      'acUpdateSize',
+      'acUpdateShape',
+      'acUpdateBleed',
+      'acUpdateIcoURL',
+      'acUpdateIcoName'
+    ]),
     // 选择图片
     selectImage(e) {
-      this.file = e.target.files[0]
+      this.acUpdateFile(e.target.files[0])
     },
     // 粘贴图片
     pasteImage(file) {
-      this.file = file
+      this.acUpdateFile(file)
+    },
+    changeShape(val) {
+      this.acUpdateShape(val)
+      if (this.shape !== 'fillet') {
+        this.acUpdateBleed(false)
+      }
     },
     // 转换成 ico 图片文件
     async convert() {
@@ -119,8 +132,8 @@ export default {
         shape: this.shape,
         bleed: this.bleed
       })
-      this.icoUrl = URL.createObjectURL(blob)
-      this.icoName = this.file.name.replace(/\.\w+$/, '.ico')
+      this.acUpdateIcoURL(URL.createObjectURL(blob))
+      this.acUpdateIcoName(this.file.name.replace(/\.\w+$/, '.ico'))
     }
   }
 }
