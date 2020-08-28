@@ -36,6 +36,10 @@
     </div>
     <div class="mdui-col-xs-6">
       <editor mode="application/json" v-model="jsonSource" @input="inputJson" />
+      <div class="mdui-m-t-1">
+        <mdui-btn @click="format" dense ripple>格式化</mdui-btn>
+        <mdui-btn @click="compress" dense ripple>压缩</mdui-btn>
+      </div>
     </div>
     <div class="mdui-col-xs-6">
       <vue-json-pretty
@@ -59,11 +63,11 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import VueJsonPretty from 'vue-json-pretty'
-import { isArray, isObject, isObjectLike, isPlainObject } from '@hhp1614/utils/lib/common/type'
+import { isArray, isObject, isObjectLike } from '@hhp1614/utils/lib/common/type'
 import { each, sort } from '@hhp1614/utils/lib/common/collection'
 
 export default {
-  name: 'FormatJson',
+  name: 'Json',
   components: { VueJsonPretty },
   data() {
     return {
@@ -124,6 +128,17 @@ export default {
         this.generateFromSource()
       })
     },
+    // JSON 排序
+    sortJson(json, order) {
+      json = isArray(json) ? [...json] : { ...sort(json, order) }
+      each(json, (value, key) => {
+        if (isObject(value)) {
+          // 递归排序
+          json[key] = this.sortJson(value, order)
+        }
+      })
+      return json
+    },
     // 事件：切换 tab
     changeTab(id) {
       // 优化
@@ -152,21 +167,13 @@ export default {
       }
       this.jsonObject = this.sortJson(this.jsonObject, order)
     },
-    // JSON 排序
-    sortJson(json, order) {
-      if (isPlainObject(json)) {
-        json = { ...sort(json, order) }
-      }
-      if (isArray(json)) {
-        json = [...json]
-      }
-      each(json, (value, key) => {
-        if (isObject(value)) {
-          // 递归排序
-          json[key] = this.sortJson(value, order)
-        }
-      })
-      return json
+    // 事件：格式化
+    format() {
+      this.jsonSource = JSON.stringify(this.jsonObject, null, 2)
+    },
+    // 事件：压缩
+    compress() {
+      this.jsonSource = JSON.stringify(this.jsonObject)
     }
   }
 }

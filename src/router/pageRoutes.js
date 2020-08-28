@@ -10,8 +10,8 @@ export const pages = [
       {
         type: 'json',
         title: 'JSON',
-        subtitle: '格式化 / 排序',
-        component: () => import('../views/format/FormatJson')
+        subtitle: '格式化 / 压缩 / 排序',
+        component: () => import('../views/format/Json')
       }
     ]
   },

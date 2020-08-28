@@ -118,6 +118,7 @@ export default {
     pasteImage(file) {
       this.acUpdateFile(file)
     },
+    // 切换形状
     changeShape(val) {
       this.acUpdateShape(val)
       if (this.shape !== 'fillet') {
