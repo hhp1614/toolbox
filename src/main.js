@@ -15,13 +15,6 @@ import Vue from 'vue'
 // MDUI
 import mdui from 'mdui'
 import 'mdui/dist/css/mdui.css'
-// vue-codemirror
-import VueCodemirror from 'vue-codemirror'
-// codemirror 代码高亮
-import 'codemirror/mode/javascript/javascript'
-// codemirror 主题样式
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/monokai.css'
 // 剪贴板
 import VueClipboard from 'vue-clipboard2'
 
@@ -30,7 +23,7 @@ import router from './router'
 import store from './store'
 import mduiPlugin from './plugins/mduiPlugin'
 import globalComponent from './plugins/globalComponent'
-import globalFilters from '@/plugins/globalFilters'
+import globalFilters from './plugins/globalFilters'
 import './scss/main.scss'
 
 // 黑色主题
@@ -46,7 +39,7 @@ Vue.use(globalComponent)
 Vue.use(globalFilters)
 
 // 代码编辑器
-Vue.use(VueCodemirror)
+// Vue.use(VueCodemirror)
 
 // 剪贴板
 Vue.use(VueClipboard)

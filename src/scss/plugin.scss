@@ -8,13 +8,9 @@ $lineHeight: $codeSize * 1.8;
 // 上下边距
 $padding: 8px;
 
-.vue-codemirror .CodeMirror {
+.CodeMirror {
   font-family: $codeFont;
   font-size: $codeSize;
-
-  pre.CodeMirror-placeholder {
-    color: #999999;
-  }
 }
 
 .line-1 .CodeMirror {

@@ -17,7 +17,6 @@
     "mdui": "^1.0.0",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
-    "vue-codemirror": "^4.0.6",
     "vue-json-pretty": "^1.6.5",
     "vue-router": "^3.2.0",
     "vuex": "^3.4.0"

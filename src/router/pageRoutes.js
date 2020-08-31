@@ -12,6 +12,12 @@ export const pages = [
         title: 'JSON',
         subtitle: '格式化 / 压缩 / 排序',
         component: () => import('../views/format/Json')
+      },
+      {
+        type: 'html',
+        title: 'HTML',
+        subtitle: '格式化 / 压缩',
+        component: () => import('../views/format/Html')
       }
     ]
   },

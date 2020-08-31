@@ -91,6 +91,42 @@ export default {
       this.acUpdateTab({ id: this.activeId, json: this.jsonSource })
       this.generateFromSource()
     },
+    // 事件：切换 tab
+    changeTab(id) {
+      // 优化
+      if (id === this.activeId) return
+      this.setJsonSource(this.acUpdateActiveTab, id)
+    },
+    // 事件：增加 tab
+    addTab() {
+      this.setJsonSource(this.acAddTab)
+    },
+    // 事件：删除 tab
+    deleteTab(index) {
+      if (this.tabs.length <= 1) return
+      this.setJsonSource(this.acDeleteTab, index)
+    },
+    // 事件：清空 tab
+    clearTab() {
+      this.setJsonSource(this.acClearTabs)
+    },
+    // 事件：排序 default-默认 asc-升序 desc-降序
+    changeOrder(order) {
+      // 默认原顺序输出
+      if (order === 'default') {
+        this.generateFromSource()
+        return
+      }
+      this.jsonObject = this.sortJson(this.jsonObject, order)
+    },
+    // 事件：格式化
+    format() {
+      this.jsonSource = JSON.stringify(this.jsonObject, null, 2)
+    },
+    // 事件：压缩
+    compress() {
+      this.jsonSource = JSON.stringify(this.jsonObject)
+    },
     // 根据输入 JSON 生成对象
     generateFromSource() {
       // 输入为空
@@ -138,42 +174,6 @@ export default {
         }
       })
       return json
-    },
-    // 事件：切换 tab
-    changeTab(id) {
-      // 优化
-      if (id === this.activeId) return
-      this.setJsonSource(this.acUpdateActiveTab, id)
-    },
-    // 事件：增加 tab
-    addTab() {
-      this.setJsonSource(this.acAddTab)
-    },
-    // 事件：删除 tab
-    deleteTab(index) {
-      if (this.tabs.length <= 1) return
-      this.setJsonSource(this.acDeleteTab, index)
-    },
-    // 事件：清空 tab
-    clearTab() {
-      this.setJsonSource(this.acClearTabs)
-    },
-    // 事件：排序 default-默认 asc-升序 desc-降序
-    changeOrder(order) {
-      // 默认原顺序输出
-      if (order === 'default') {
-        this.generateFromSource()
-        return
-      }
-      this.jsonObject = this.sortJson(this.jsonObject, order)
-    },
-    // 事件：格式化
-    format() {
-      this.jsonSource = JSON.stringify(this.jsonObject, null, 2)
-    },
-    // 事件：压缩
-    compress() {
-      this.jsonSource = JSON.stringify(this.jsonObject)
     }
   }
 }
