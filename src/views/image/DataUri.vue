@@ -96,15 +96,15 @@ export default {
   },
   methods: {
     ...mapActions('image/dataUri', ['acUpdateFile', 'acUpdateDataUri', 'acUpdateInputUri', 'acUpdateImgUri']),
-    // 选择图片
+    // 事件：选择图片
     selectImage(e) {
       this.acUpdateFile(e.target.files[0])
     },
-    // 粘贴图片
+    // 事件：粘贴图片
     pasteImage(file) {
       this.acUpdateFile(file)
     },
-    // 图片转换成 URI
+    // 事件：图片转换成 URI
     getDataUri() {
       const fr = new FileReader()
       fr.readAsBinaryString(this.file)
@@ -112,7 +112,7 @@ export default {
         this.acUpdateDataUri(`data:${this.file.type};base64,${Base64.btoa(String(fr.result))}`)
       }
     },
-    // DataURI 转换成图片
+    // 事件：DataURI 转换成图片
     checkUri() {
       if (/^data:image\/.+;base64,/.test(this.inputUri)) {
         this.acUpdateImgUri(this.inputUri)
@@ -120,7 +120,7 @@ export default {
       }
       this.$snackbar('Data URI 格式错误')
     },
-    // 图片加载失败
+    // 事件：图片加载失败
     loadError() {
       this.acUpdateInputUri('')
       this.$snackbar('Data URI 无法解析')

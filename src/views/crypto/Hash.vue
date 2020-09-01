@@ -54,7 +54,7 @@ export default {
       'acUpdateUseSecret',
       'acUpdateSecret'
     ]),
-    // 计算
+    // 事件：计算
     compute() {
       try {
         const hmac = this.useSecret ? 'Hmac' : ''

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     ...mapActions('crypto/encrypt', ['acUpdateBeforeCoding', 'acUpdateAfterCoding', 'acUpdateMode', 'acUpdateSecret']),
-    // 加密
+    // 事件：加密
     encrypt() {
       try {
         const afterCoding = Crypto[this.mode].encrypt(this.beforeCoding, this.secret).toString()
@@ -46,7 +46,7 @@ export default {
         this.$snackbar('加密失败')
       }
     },
-    // 解密
+    // 事件：解密
     decrypt() {
       const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret)
       if (bytes.sigBytes >= 0) {

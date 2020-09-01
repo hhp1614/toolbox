@@ -110,22 +110,22 @@ export default {
       'acUpdateIcoURL',
       'acUpdateIcoName'
     ]),
-    // 选择图片
+    // 事件：选择图片
     selectImage(e) {
       this.acUpdateFile(e.target.files[0])
     },
-    // 粘贴图片
+    // 事件：粘贴图片
     pasteImage(file) {
       this.acUpdateFile(file)
     },
-    // 切换形状
+    // 事件：切换形状
     changeShape(val) {
       this.acUpdateShape(val)
       if (this.shape !== 'fillet') {
         this.acUpdateBleed(false)
       }
     },
-    // 转换成 ico 图片文件
+    // 事件：转换成 ico 图片文件
     async convert() {
       const blob = await imageToIco.convert({
         source: this.file,

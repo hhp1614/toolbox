@@ -18,6 +18,12 @@ export const pages = [
         title: 'HTML',
         subtitle: '格式化 / 压缩',
         component: () => import('../views/format/Html')
+      },
+      {
+        type: 'css',
+        title: 'CSS',
+        subtitle: '格式化 / 压缩 / 优化',
+        component: () => import('../views/format/Css')
       }
     ]
   },

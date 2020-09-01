@@ -3,6 +3,7 @@
 /*
 插件 codemirror 样式设置
  */
+
 // 行高
 $lineHeight: $codeSize * 1.8;
 // 上下边距
@@ -13,42 +14,9 @@ $padding: 8px;
   font-size: $codeSize;
 }
 
-.line-1 .CodeMirror {
-  height: $lineHeight + $padding !important;
-}
-
-.line-2 .CodeMirror {
-  height: $lineHeight * 2 + $padding !important;
-}
-
-.line-3 .CodeMirror {
-  height: $lineHeight * 3 + $padding !important;
-}
-
-.line-4 .CodeMirror {
-  height: $lineHeight * 4 + $padding !important;
-}
-
-.line-5 .CodeMirror {
-  height: $lineHeight * 5 + $padding !important;
-}
-
-.line-6 .CodeMirror {
-  height: $lineHeight * 6 + $padding !important;
-}
-
-.line-7 .CodeMirror {
-  height: $lineHeight * 7 + $padding !important;
-}
-
-.line-8 .CodeMirror {
-  height: $lineHeight * 8 + $padding !important;
-}
-
-.line-9 .CodeMirror {
-  height: $lineHeight * 9 + $padding !important;
-}
-
-.line-10 .CodeMirror {
-  height: $lineHeight * 10 + $padding !important;
+// 根据行数计算编辑器高度，生成 .line-1 到 .line-20 的样式
+@for $i from 1 through 20 {
+  .line-#{$i} .CodeMirror {
+    height: $lineHeight * $i + $padding !important;
+  }
 }
