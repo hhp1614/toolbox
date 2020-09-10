@@ -66,7 +66,6 @@ export default {
     acDeleteTab({ commit, state, dispatch }, index) {
       commit(DELETE_TAB, index)
       const isLast = state.tabs.length === index
-      console.log(state)
       dispatch('acUpdateActiveTab', isLast ? state.tabs[index - 1].id : state.tabs[index].id)
     },
     // action：清空 json 数据
