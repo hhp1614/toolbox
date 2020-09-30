@@ -69,9 +69,9 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import { isEmptyObject } from '@hhp1614/utils/lib/common/type'
-import { pages } from '@/router/pageRoutes'
+import { mapActions, mapState } from 'vuex';
+import { isEmptyObject } from '@hhp1614/utils/lib/common/type';
+import { pages } from '@/router/pageRoutes';
 
 /**
  * 布局组件
@@ -90,50 +90,50 @@ export default {
       toggleDarkBtn: null,
       // 标题
       titleHTML: ''
-    }
+    };
   },
   computed: {
     ...mapState(['dark']),
     // 切换主题按钮的提示内容
     tooltipContent() {
-      return this.dark ? '切换到浅色主题' : '切换到深色主题'
+      return this.dark ? '切换到浅色主题' : '切换到深色主题';
     }
   },
   watch: {
     // 根据路由切换标题
     $route({ meta }) {
-      this.setTitle(meta)
+      this.setTitle(meta);
     }
   },
   mounted() {
-    this.drawer = new this.$Drawer(this.$refs.drawer)
-    this.collapse = new this.$Collapse(this.$refs.collapse)
-    this.toggleDarkBtn = new this.$Tooltip(this.$refs.toggleDark.$el, { content: this.tooltipContent })
-    this.setTitle(this.$route.meta)
-    this.setTheme()
+    this.drawer = new this.$Drawer(this.$refs.drawer);
+    this.collapse = new this.$Collapse(this.$refs.collapse);
+    this.toggleDarkBtn = new this.$Tooltip(this.$refs.toggleDark.$el, { content: this.tooltipContent });
+    this.setTitle(this.$route.meta);
+    this.setTheme();
   },
   methods: {
     ...mapActions(['acToggleDark']),
     // 切换深色主题
     toggleDark() {
       this.acToggleDark().then(() => {
-        this.toggleDarkBtn.close()
-        this.toggleDarkBtn.open({ content: this.tooltipContent })
-        this.setTheme()
-      })
+        this.toggleDarkBtn.close();
+        this.toggleDarkBtn.open({ content: this.tooltipContent });
+        this.setTheme();
+      });
     },
     // 设置标题
     setTitle(meta) {
-      this.titleHTML = isEmptyObject(meta) ? '' : ` ${meta.title} <small>${meta.subtitle ?? ''}</small>`
+      this.titleHTML = isEmptyObject(meta) ? '' : ` ${meta.title} <small>${meta.subtitle ?? ''}</small>`;
     },
     // 设置主题
     setTheme() {
-      const rc = this.dark ? 'light' : 'dark'
-      const ac = this.dark ? 'dark' : 'light'
+      const rc = this.dark ? 'light' : 'dark';
+      const ac = this.dark ? 'dark' : 'light';
       this.$$('body')
         .removeClass(`mdui-theme-layout-${rc}`)
-        .addClass(`mdui-theme-layout-${ac}`)
+        .addClass(`mdui-theme-layout-${ac}`);
     }
   }
-}
+};
 </script>

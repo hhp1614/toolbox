@@ -24,16 +24,16 @@ export default {
       btn: null,
       tipsDefault: '复制',
       tipsSuccess: '复制成功'
-    }
+    };
   },
   mounted() {
-    this.btn = new this.$Tooltip('.copy-btn', { content: this.tipsDefault })
+    this.btn = new this.$Tooltip('.copy-btn', { content: this.tipsDefault });
   },
   methods: {
     onCopy() {
-      this.btn.close()
-      this.btn.open({ content: this.tipsSuccess })
+      this.btn.close();
+      this.btn.open({ content: this.tipsSuccess });
     }
   }
-}
+};
 </script>
