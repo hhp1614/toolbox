@@ -112,9 +112,10 @@ export default {
           minute === this.notify.minute &&
           second === this.notify.second;
         if (condition) {
+          const iconBaseUrl = process.env.NODE_ENV === 'development' ? './' : '/toolbox/';
           this.notification.openNotification('通知', {
             body: this.notify.text,
-            icon: './avatar.png',
+            icon: iconBaseUrl + 'avatar.png',
             requireInteraction: true
           });
         }
