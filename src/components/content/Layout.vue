@@ -19,6 +19,9 @@
         >
           <mdui-icon :type="dark ? 'brightness_4' : 'brightness_7'" />
         </mdui-btn>
+        <mdui-btn mdui-tooltip="{content: '周报/日报提醒'}" mdui-dialog="{target: '#dialog-notify'}" icon>
+          <mdui-icon type="notifications_paused" />
+        </mdui-btn>
         <mdui-btn mdui-tooltip="{content: '关于'}" icon>
           <mdui-icon type="info" />
         </mdui-btn>
@@ -65,6 +68,9 @@
       <h1 v-html="titleHTML" />
       <router-view />
     </div>
+
+    <!-- 弹窗 -->
+    <dialog-notify />
   </div>
 </template>
 
@@ -72,12 +78,14 @@
 import { mapActions, mapState } from 'vuex';
 import { isEmptyObject } from '@hhp1614/utils/lib/common/type';
 import { pages } from '@/router/pageRoutes';
+import DialogNotify from '@/components/content/dialogs/DialogNotify';
 
 /**
  * 布局组件
  */
 export default {
   name: 'Layout',
+  components: { DialogNotify },
   data() {
     return {
       // 导航配置

@@ -6,6 +6,7 @@ import MduiCheckbox from '@/components/global/MduiCheckbox';
 import ActionBar from '@/components/global/ActionBar';
 import PasteImage from '@/components/global/PasteImage';
 import MduiRadio from '@/components/global/MduiRadio';
+import MduiSwitch from '@/components/global/MduiSwitch';
 
 /**
  * 全局组件
@@ -17,6 +18,7 @@ export default {
     Vue.component('MduiBtn', MduiBtn);
     Vue.component('MduiIcon', MduiIcon);
     Vue.component('MduiCheckbox', MduiCheckbox);
+    Vue.component('MduiSwitch', MduiSwitch);
     Vue.component('MduiRadio', MduiRadio);
     Vue.component('ActionBar', ActionBar);
     Vue.component('PasteImage', PasteImage);
