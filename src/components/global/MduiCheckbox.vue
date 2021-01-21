@@ -1,6 +1,11 @@
 <template>
   <label class="mdui-checkbox mdui-p-l-3 mdui-m-l-2">
-    <input type="checkbox" v-model="checkboxModel" :value="value" :disabled="disabled" />
+    <input
+      type="checkbox"
+      v-model="checkboxModel"
+      :value="value"
+      :disabled="disabled"
+    />
     <i class="mdui-checkbox-icon"></i>
     {{ label }}
   </label>
@@ -25,12 +30,12 @@ export default {
   computed: {
     checkboxModel: {
       get() {
-        return this.checked;
+        return this.checked
       },
       set(val) {
-        this.$emit('change', val);
+        this.$emit('change', val)
       }
     }
   }
-};
+}
 </script>

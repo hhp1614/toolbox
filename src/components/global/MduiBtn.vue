@@ -43,15 +43,15 @@ export default {
         'mdui-btn-icon': this.icon,
         'mdui-btn-dense': this.dense,
         'mdui-btn-block': this.block
-      };
+      }
       if (this.color) {
-        c['mdui-color-' + this.color] = true;
+        c['mdui-color-' + this.color] = true
       }
       if (this.textColor) {
-        c['mdui-text-color-' + this.textColor] = true;
+        c['mdui-text-color-' + this.textColor] = true
       }
-      return c;
+      return c
     }
   }
-};
+}
 </script>

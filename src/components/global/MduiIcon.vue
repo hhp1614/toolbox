@@ -1,5 +1,7 @@
 <template>
-  <i class="mdui-icon material-icons" @click="$emit('click', $event)">{{ type }}</i>
+  <i class="mdui-icon material-icons" @click="$emit('click', $event)">{{
+    type
+  }}</i>
 </template>
 
 <script>
@@ -12,5 +14,5 @@ export default {
     // 图标名称
     type: String
   }
-};
+}
 </script>

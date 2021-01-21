@@ -6,7 +6,9 @@
     @mouseenter="() => btn.open({ content: '复制' })"
     @mouseleave="() => btn.close()"
   >
-    <i class="mdui-icon material-icons" style="margin-top: -4px;">content_copy</i>
+    <i class="mdui-icon material-icons" style="margin-top: -4px;"
+      >content_copy</i
+    >
   </button>
 </template>
 
@@ -24,16 +26,16 @@ export default {
       btn: null,
       tipsDefault: '复制',
       tipsSuccess: '复制成功'
-    };
+    }
   },
   mounted() {
-    this.btn = new this.$Tooltip('.copy-btn', { content: this.tipsDefault });
+    this.btn = new this.$Tooltip('.copy-btn', { content: this.tipsDefault })
   },
   methods: {
     onCopy() {
-      this.btn.close();
-      this.btn.open({ content: this.tipsSuccess });
+      this.btn.close()
+      this.btn.open({ content: this.tipsSuccess })
     }
   }
-};
+}
 </script>

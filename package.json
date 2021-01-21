@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "prettier --write src/**/*.{js,vue,scss,html}"
   },
   "dependencies": {
     "@hhp1614/utils": "^2.0.9",
@@ -18,6 +19,7 @@
     "mdui": "^1.0.0",
     "minimize": "^2.2.0",
     "prettier": "^1.19.1",
+    "qs": "^6.9.6",
     "vue": "^2.6.11",
     "vue-clipboard2": "^0.3.1",
     "vue-json-pretty": "^1.6.5",

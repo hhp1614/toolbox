@@ -1,9 +1,9 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import Home from '../views/Home';
-import { pageRoutes } from './pageRoutes';
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+import Home from '../views/Home'
+import { pageRoutes } from './pageRoutes'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 const routes = [
   {
@@ -15,12 +15,12 @@ const routes = [
     }
   },
   ...pageRoutes
-];
+]
 
 const router = new VueRouter({
   mode: 'hash',
   base: process.env.BASE_URL,
   routes
-});
+})
 
-export default router;
+export default router

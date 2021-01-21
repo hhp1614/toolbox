@@ -14,6 +14,12 @@ export const pages = [
         component: () => import('../views/format/Json')
       },
       {
+        type: 'url-parse',
+        title: 'URL 参数',
+        subtitle: '解析 / 序列化',
+        component: () => import('../views/format/UrlParse')
+      },
+      {
         type: 'html',
         title: 'HTML',
         subtitle: '格式化 / 压缩',
@@ -83,10 +89,10 @@ export const pages = [
       }
     ]
   }
-];
+]
 
 // 路由表扁平化
-const routes = [];
+const routes = []
 pages.forEach(i => {
   i.children.forEach(j => {
     routes.push({
@@ -97,11 +103,11 @@ pages.forEach(i => {
         title: j.title,
         subtitle: j.subtitle
       }
-    });
-  });
-});
+    })
+  })
+})
 
 /**
  * 导航路由
  */
-export const pageRoutes = routes;
+export const pageRoutes = routes

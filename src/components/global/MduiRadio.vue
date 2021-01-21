@@ -1,6 +1,11 @@
 <template>
   <label class="mdui-radio mdui-p-l-3 mdui-m-l-2">
-    <input type="radio" v-model="radioModel" :value="value" :disabled="disabled" />
+    <input
+      type="radio"
+      v-model="radioModel"
+      :value="value"
+      :disabled="disabled"
+    />
     <i class="mdui-radio-icon"></i>
     {{ label }}
   </label>
@@ -25,12 +30,12 @@ export default {
   computed: {
     radioModel: {
       get() {
-        return this.checked;
+        return this.checked
       },
       set(val) {
-        this.$emit('change', val);
+        this.$emit('change', val)
       }
     }
   }
-};
+}
 </script>
