@@ -58,8 +58,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import Crypto from 'crypto-js'
+import { mapActions, mapState } from 'vuex';
+import Crypto from 'crypto-js';
 
 export default {
   name: 'Hash',
@@ -76,7 +76,7 @@ export default {
         'SHA3',
         'RIPEMD160'
       ]
-    }
+    };
   },
   computed: {
     ...mapState('crypto/hash', [
@@ -88,7 +88,7 @@ export default {
     ])
   },
   mounted() {
-    this.select = new this.$Select(this.$refs.select)
+    this.select = new this.$Select(this.$refs.select);
   },
   methods: {
     ...mapActions('crypto/hash', [
@@ -101,17 +101,17 @@ export default {
     // 事件：计算
     compute() {
       try {
-        const hmac = this.useSecret ? 'Hmac' : ''
-        const secret = this.useSecret ? this.secret : undefined
+        const hmac = this.useSecret ? 'Hmac' : '';
+        const secret = this.useSecret ? this.secret : undefined;
         const hash = Crypto[hmac + this.mode](
           this.beforeCoding,
           secret
-        ).toString()
-        this.acUpdateAfterCoding(hash)
+        ).toString();
+        this.acUpdateAfterCoding(hash);
       } catch {
-        this.$snackbar('计算失败')
+        this.$snackbar('计算失败');
       }
     }
   }
-}
+};
 </script>

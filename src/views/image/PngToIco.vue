@@ -119,8 +119,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import imageToIco from '@/utils/imageToIco'
+import { mapActions, mapState } from 'vuex';
+import imageToIco from '@/utils/imageToIco';
 
 export default {
   name: 'PngToIco',
@@ -134,7 +134,7 @@ export default {
         { value: 'circle', name: '圆形' },
         { value: 'fillet', name: '圆角矩形' }
       ]
-    }
+    };
   },
   computed: {
     ...mapState('image/pngToIco', [
@@ -147,7 +147,7 @@ export default {
     ]),
     // 图片转成的 URL
     blobURL() {
-      return this.file ? window.URL.createObjectURL(this.file) : ''
+      return this.file ? window.URL.createObjectURL(this.file) : '';
     }
   },
   methods: {
@@ -161,17 +161,17 @@ export default {
     ]),
     // 事件：选择图片
     selectImage(e) {
-      this.acUpdateFile(e.target.files[0])
+      this.acUpdateFile(e.target.files[0]);
     },
     // 事件：粘贴图片
     pasteImage(file) {
-      this.acUpdateFile(file)
+      this.acUpdateFile(file);
     },
     // 事件：切换形状
     changeShape(val) {
-      this.acUpdateShape(val)
+      this.acUpdateShape(val);
       if (this.shape !== 'fillet') {
-        this.acUpdateBleed(false)
+        this.acUpdateBleed(false);
       }
     },
     // 事件：转换成 ico 图片文件
@@ -181,10 +181,10 @@ export default {
         size: this.size,
         shape: this.shape,
         bleed: this.bleed
-      })
-      this.acUpdateIcoURL(URL.createObjectURL(blob))
-      this.acUpdateIcoName(this.file.name.replace(/\.\w+$/, '.ico'))
+      });
+      this.acUpdateIcoURL(URL.createObjectURL(blob));
+      this.acUpdateIcoName(this.file.name.replace(/\.\w+$/, '.ico'));
     }
   }
-}
+};
 </script>

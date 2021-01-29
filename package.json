@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "format": "prettier --write src/**/*.{js,vue,scss,html}"
+    "format": "prettier --write src/**/*.{js,vue,scss,html} README.md"
   },
   "dependencies": {
     "@hhp1614/utils": "^2.0.9",

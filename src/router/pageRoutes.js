@@ -89,10 +89,10 @@ export const pages = [
       }
     ]
   }
-]
+];
 
 // 路由表扁平化
-const routes = []
+const routes = [];
 pages.forEach(i => {
   i.children.forEach(j => {
     routes.push({
@@ -103,11 +103,11 @@ pages.forEach(i => {
         title: j.title,
         subtitle: j.subtitle
       }
-    })
-  })
-})
+    });
+  });
+});
 
 /**
  * 导航路由
  */
-export const pageRoutes = routes
+export const pageRoutes = routes;

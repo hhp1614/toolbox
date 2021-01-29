@@ -36,8 +36,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import { encode, decode } from 'js-base64'
+import { mapActions, mapState } from 'vuex';
+import { encode, decode } from 'js-base64';
 
 export default {
   name: 'Base64',
@@ -52,26 +52,26 @@ export default {
     ]),
     // 事件：编码
     encode() {
-      let afterCoding
+      let afterCoding;
       if (this.batchMode) {
-        const lines = this.beforeCoding.split('\n').map(i => encode(i))
-        afterCoding = lines.join('\n')
+        const lines = this.beforeCoding.split('\n').map(i => encode(i));
+        afterCoding = lines.join('\n');
       } else {
-        afterCoding = encode(this.beforeCoding)
+        afterCoding = encode(this.beforeCoding);
       }
-      this.acUpdateAfterCoding(afterCoding)
+      this.acUpdateAfterCoding(afterCoding);
     },
     // 事件：解码
     decode() {
-      let beforeCoding
+      let beforeCoding;
       if (this.batchMode) {
-        const lines = this.afterCoding.split('\n').map(i => decode(i))
-        beforeCoding = lines.join('\n')
+        const lines = this.afterCoding.split('\n').map(i => decode(i));
+        beforeCoding = lines.join('\n');
       } else {
-        beforeCoding = decode(this.afterCoding)
+        beforeCoding = decode(this.afterCoding);
       }
-      this.acUpdateBeforeCoding(beforeCoding)
+      this.acUpdateBeforeCoding(beforeCoding);
     }
   }
-}
+};
 </script>

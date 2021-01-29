@@ -24,12 +24,12 @@ export default {
   computed: {
     checkboxModel: {
       get() {
-        return this.checked
+        return this.checked;
       },
       set(val) {
-        this.$emit('change', val)
+        this.$emit('change', val);
       }
     }
   }
-}
+};
 </script>

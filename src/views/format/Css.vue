@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import CleanCss from 'clean-css'
+import { mapActions, mapState } from 'vuex';
+import CleanCss from 'clean-css';
 
 export default {
   name: 'Css',
@@ -47,14 +47,15 @@ export default {
     ...mapActions('format/css', ['acUpdateCode']),
     // 事件：格式化
     format() {
-      const code = new CleanCss({ format: 'beautify' }).minify(this.code).styles
-      this.acUpdateCode(code)
+      const code = new CleanCss({ format: 'beautify' }).minify(this.code)
+        .styles;
+      this.acUpdateCode(code);
     },
     // 事件：压缩
     compress(level) {
-      const code = new CleanCss({ level }).minify(this.code).styles
-      this.acUpdateCode(code)
+      const code = new CleanCss({ level }).minify(this.code).styles;
+      this.acUpdateCode(code);
     }
   }
-}
+};
 </script>

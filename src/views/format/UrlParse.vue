@@ -37,8 +37,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import qs from 'qs'
+import { mapActions, mapState } from 'vuex';
+import qs from 'qs';
 
 export default {
   name: 'UrlParams',
@@ -53,20 +53,20 @@ export default {
     ]),
     // 事件：解析 url
     parse() {
-      const url = this.url.replace(/^.*\?/, '')
-      const res = qs.parse(url)
-      this.acUpdateJson(JSON.stringify(res, null, 2))
+      const url = this.url.replace(/^.*\?/, '');
+      const res = qs.parse(url);
+      this.acUpdateJson(JSON.stringify(res, null, 2));
     },
     // 事件：序列化 json
     serialization() {
       try {
-        const obj = JSON.parse(this.json)
-        const url = qs.stringify(obj, { encode: this.urlEncode })
-        this.acUpdateURL(url)
+        const obj = JSON.parse(this.json);
+        const url = qs.stringify(obj, { encode: this.urlEncode });
+        this.acUpdateURL(url);
       } catch (err) {
-        this.acUpdateURL('')
+        this.acUpdateURL('');
       }
     }
   }
-}
+};
 </script>

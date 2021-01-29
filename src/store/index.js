@@ -1,15 +1,15 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import { Local } from '@hhp1614/utils/lib/browser/storage'
-import format from './modules/format'
-import crypto from './modules/crypto'
-import image from './modules/image'
+import Vue from 'vue';
+import Vuex from 'vuex';
+import { Local } from '@hhp1614/utils/lib/browser/storage';
+import format from './modules/format';
+import crypto from './modules/crypto';
+import image from './modules/image';
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 // 切换深色主题
-const TOGGLE_DARK = 'TOGGLE_DARK'
-const UPDATE_NOTIFY = 'UPDATE_NOTIFY'
+const TOGGLE_DARK = 'TOGGLE_DARK';
+const UPDATE_NOTIFY = 'UPDATE_NOTIFY';
 
 export default new Vuex.Store({
   namespaced: true,
@@ -28,23 +28,23 @@ export default new Vuex.Store({
   },
   mutations: {
     [TOGGLE_DARK](state) {
-      state.dark = !state.dark
-      Local.set('dark', state.dark)
+      state.dark = !state.dark;
+      Local.set('dark', state.dark);
     },
     [UPDATE_NOTIFY](state, notify) {
-      state.notify = { ...state.notify, ...notify }
-      Local.set('notify', state.notify)
+      state.notify = { ...state.notify, ...notify };
+      Local.set('notify', state.notify);
     }
   },
   actions: {
     // action：切换深色主题
     acToggleDark({ commit }) {
-      commit(TOGGLE_DARK)
+      commit(TOGGLE_DARK);
     },
     // action: 更新通知设置
     acUpdateNotify({ commit }, notify) {
-      commit(UPDATE_NOTIFY, notify)
+      commit(UPDATE_NOTIFY, notify);
     }
   },
   modules: { format, crypto, image }
-})
+});

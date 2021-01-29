@@ -48,8 +48,8 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
-import Crypto from 'crypto-js'
+import { mapActions, mapState } from 'vuex';
+import Crypto from 'crypto-js';
 
 export default {
   name: 'Crypto',
@@ -65,7 +65,7 @@ export default {
         'RabbitLegacy',
         'TripleDES'
       ]
-    }
+    };
   },
   computed: {
     ...mapState('crypto/encrypt', [
@@ -76,7 +76,7 @@ export default {
     ])
   },
   mounted() {
-    this.select = new this.$Select(this.$refs.select)
+    this.select = new this.$Select(this.$refs.select);
   },
   methods: {
     ...mapActions('crypto/encrypt', [
@@ -90,22 +90,22 @@ export default {
       try {
         const afterCoding = Crypto[this.mode]
           .encrypt(this.beforeCoding, this.secret)
-          .toString()
-        this.acUpdateAfterCoding(afterCoding)
+          .toString();
+        this.acUpdateAfterCoding(afterCoding);
       } catch {
-        this.$snackbar('加密失败')
+        this.$snackbar('加密失败');
       }
     },
     // 事件：解密
     decrypt() {
-      const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret)
+      const bytes = Crypto[this.mode].decrypt(this.afterCoding, this.secret);
       if (bytes.sigBytes >= 0) {
-        const beforeCoding = Crypto.enc.Utf8.stringify(bytes)
-        this.acUpdateBeforeCoding(beforeCoding)
+        const beforeCoding = Crypto.enc.Utf8.stringify(bytes);
+        this.acUpdateBeforeCoding(beforeCoding);
       } else {
-        this.$snackbar('解密失败，信息有误')
+        this.$snackbar('解密失败，信息有误');
       }
     }
   }
-}
+};
 </script>
